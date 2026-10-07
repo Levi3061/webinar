@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI Cinematic Films Webinar — Sarv Media × Jay Patel</title>
+<meta name="description" content="AI से सिनेमा जैसी real फ़िल्में बनाना सीखो — live webinar, हिंदी में। शनिवार 10 Oct, रात 8–10 बजे, Zoom पर। ₹499 का webinar सिर्फ़ ₹49 में।">
+<meta property="og:title" content="AI से बनाओ सिनेमा जैसी real फ़िल्में — Live Webinar">
+<meta property="og:description" content="शनिवार 10 Oct, रात 8–10 बजे · Zoom पर live, हिंदी में · ₹499 का webinar सिर्फ़ ₹49 में।">
+<meta property="og:image" content="assets/shot-4.jpg">
+<meta name="theme-color" content="#0b0a08">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0b0a08; --surface:#151410; --surface-2:#12110e;
+  --paper:#EFEFE4; --paper-2:#cfcec1; --dim:#B8B7A8; --mute:#8e8d80;
+  --kesar:#F2A22C; --kesar-hi:#ffb648; --on-kesar:#120d04;
+  --red:#ff5a5f; --red-soft:#ffb3b5;
+  --line:rgba(239,239,228,.10); --line-2:rgba(239,239,228,.16);
+  --sans:"Mukta","Noto Sans Devanagari",system-ui,sans-serif;
+  --serif:"Cormorant Garamond",Georgia,serif;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{max-width:100%;display:block}
+a{color:var(--kesar)}
+h1,h2,h3,p{margin:0}
+:focus-visible{outline:2px solid var(--kesar);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+.ico{width:20px;height:20px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.wrap{width:100%;max-width:1240px;margin-inline:auto;padding-inline:16px}
+
+/* top */
+.top{position:sticky;top:0;z-index:40}
+.strip{background:var(--kesar);color:var(--on-kesar);font-size:13px;font-weight:600;text-align:center;padding:6px 12px;line-height:1.35}
+.strip b{font-variant-numeric:tabular-nums;background:var(--on-kesar);color:var(--kesar);padding:1px 7px;border-radius:5px;white-space:nowrap}
+.strip .lg{display:none}
+.bar{background:rgba(11,10,8,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand img{height:24px;width:auto}
+.brand span,.bar-date{font-size:14px;color:var(--dim);white-space:nowrap}
+.bar-date{display:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--kesar);color:var(--on-kesar);text-decoration:none;font-weight:800;border-radius:999px;min-height:44px;padding:8px 18px;font-size:15px;border:0;cursor:pointer;font-family:inherit;transition:background .15s,transform .15s;white-space:nowrap}
+.btn:hover{background:var(--kesar-hi);color:var(--on-kesar);transform:translateY(-1px)}
+
+/* layout */
+.crumb{font-size:13px;color:var(--mute);margin:20px 0 16px}
+.crumb a{color:var(--mute);text-decoration:none}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:0}
+.hero{padding-bottom:28px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.badge{display:inline-flex;align-items:center;gap:7px;background:rgba(239,239,228,.08);font-size:12px;font-weight:700;padding:5px 11px;border-radius:999px}
+.badge.live{background:rgba(229,72,77,.15);color:#ff8a8d;letter-spacing:.08em}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.3}}
+h1{font-size:clamp(34px,8.6vw,56px);line-height:1.14;font-weight:800;letter-spacing:-.01em;margin-bottom:12px}
+h1 em{font-family:var(--serif);font-weight:600;color:var(--kesar)}
+.lede{font-size:clamp(17px,4.4vw,20px);color:var(--paper-2);max-width:620px;margin-bottom:20px}
+.lede strong{color:var(--paper)}
+.hosts-line{display:flex;align-items:center;gap:12px;margin-bottom:22px;font-size:15px;line-height:1.35}
+.hosts-line img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--kesar)}
+.hosts-line small{display:block;color:var(--mute);font-size:14px}
+.meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:22px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;gap:10px;align-items:flex-start;min-width:0}
+.tile .ico{color:var(--kesar);margin-top:2px}
+.tile small{display:block;font-size:12px;color:var(--mute)}
+.tile strong{display:block;font-size:15px;line-height:1.3}
+.hero-film{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line-2);aspect-ratio:16/9;background:var(--surface)}
+.hero-film video{width:100%;height:100%;object-fit:cover}
+.hero-film::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.8));pointer-events:none}
+.tag{position:absolute;left:12px;top:12px;z-index:1;background:rgba(0,0,0,.6);font-size:11px;font-weight:800;letter-spacing:.06em;padding:4px 9px;border-radius:999px}
+.cap{position:absolute;left:14px;right:14px;bottom:10px;z-index:1;font-size:14px;font-weight:700}
+
+/* buy card */
+.buy{background:var(--surface);border:1px solid rgba(242,162,44,.4);border-radius:20px;padding:20px 18px;box-shadow:0 24px 60px rgba(0,0,0,.45);margin-bottom:40px;scroll-margin-top:110px;transition:box-shadow .3s}
+.buy.flash{box-shadow:0 0 0 3px var(--kesar),0 24px 60px rgba(0,0,0,.45)}
+.cd-label{font-size:14px;font-weight:600;color:var(--dim);margin-bottom:8px}
+.cd{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:20px}
+.cd div{background:var(--ink);border:1px solid var(--line);border-radius:12px;padding:8px 2px;text-align:center}
+.cd b{display:block;font-size:26px;font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums}
+.cd span{font-size:12px;color:var(--mute)}
+.price{display:flex;align-items:baseline;flex-wrap:wrap;gap:10px}
+.price .now{font-size:46px;font-weight:800;line-height:1}
+.price s{font-size:22px;color:var(--mute);font-weight:600}
+.price .off{font-size:14px;font-weight:800;color:var(--on-kesar);background:var(--kesar);padding:3px 9px;border-radius:6px;align-self:center}
+.price-sub{font-size:14px;color:var(--mute);margin:4px 0 14px}
+.hold{display:flex;align-items:center;gap:10px;background:rgba(242,162,44,.10);border:1px dashed rgba(242,162,44,.55);border-radius:12px;padding:10px 12px;margin-bottom:16px;font-size:14px;color:#f6c27a}
+.hold b{color:var(--kesar);font-variant-numeric:tabular-nums}
+.rzp{display:flex;justify-content:center;align-items:center;min-height:72px;margin:0;padding:14px 0}
+.rzp form{margin:0;transform:scale(1.35);transform-origin:center}
+.secure{display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px;color:var(--mute);text-align:center;margin-bottom:18px}
+.secure .ico{width:14px;height:14px}
+.steps{background:var(--ink);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:16px}
+.steps h3,.incl h3{font-size:14px;font-weight:700;color:var(--dim);margin-bottom:10px}
+.steps ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;font-size:14px}
+.steps li{display:flex;gap:10px;align-items:center}
+.steps li span{width:24px;height:24px;border-radius:50%;background:var(--kesar);color:var(--on-kesar);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.incl{border-top:1px solid var(--line);padding-top:14px}
+.checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:15px;color:var(--paper-2)}
+.checks li{display:flex;gap:10px}
+.checks .ico{color:var(--kesar);stroke-width:2.4;width:18px;height:18px;margin-top:3px}
+.seats{display:flex;align-items:center;gap:10px;margin-top:16px;padding:12px;background:rgba(229,72,77,.10);border-radius:12px;font-size:14px;color:var(--red-soft)}
+.seats strong{color:#ffd0d1}
+
+/* sections */
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--line-2);margin-bottom:36px;position:sticky;top:var(--top-h,96px);z-index:5;background:var(--ink)}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{color:var(--dim);text-decoration:none;font-weight:600;font-size:15px;padding:12px;white-space:nowrap;border-bottom:2px solid transparent}
+.tabs a.on{color:var(--paper);border-bottom-color:var(--kesar)}
+section.blk{margin-bottom:56px;scroll-margin-top:150px}
+h2{font-size:clamp(26px,6.4vw,32px);line-height:1.2;font-weight:800;margin-bottom:6px}
+.sub{color:var(--dim);font-size:16px;margin-bottom:20px}
+.learn{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;list-style:none;margin:0}
+.learn li{display:flex;gap:12px;font-size:16px}
+.learn .ico{color:var(--kesar);stroke-width:2.4;margin-top:3px}
+.agenda-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.ghost{background:transparent;border:1px solid var(--line-2);color:var(--paper);font:inherit;font-size:14px;font-weight:600;padding:8px 16px;border-radius:999px;cursor:pointer;min-height:44px}
+.acc{border:1px solid var(--line-2);border-radius:18px;overflow:hidden}
+.acc details{border-bottom:1px solid var(--line);background:var(--surface-2)}
+.acc details:last-child{border-bottom:0}
+.acc summary{list-style:none;display:flex;align-items:center;gap:14px;padding:16px;cursor:pointer;min-height:44px}
+.acc summary::-webkit-details-marker{display:none}
+.acc .n{font-size:14px;font-weight:800;color:var(--kesar);min-width:24px;font-variant-numeric:tabular-nums}
+.acc .t{flex:1;min-width:0}
+.acc .t b{display:block;font-size:17px;line-height:1.35}
+.acc .t small{display:block;font-size:13px;color:var(--mute)}
+.acc .chev{transition:transform .2s}
+.acc details[open] .chev{transform:rotate(180deg)}
+.acc p{padding:0 16px 18px 54px;color:var(--paper-2);font-size:16px}
+.films{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+.films video{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:14px;background:var(--surface)}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px}
+.card h3{font-size:18px;font-weight:800;margin-bottom:6px}
+.card p{color:var(--dim);font-size:15px}
+.not{margin-top:14px;font-size:15px;color:var(--dim)}
+.not strong{color:var(--paper)}
+.review{margin:0;display:flex;flex-direction:column;gap:14px}
+.review blockquote{margin:0;font-size:16px;color:#dcdbcf;flex:1}
+.review figcaption{display:flex;align-items:center;gap:12px}
+.av{width:40px;height:40px;border-radius:50%;background:#2a2416;color:var(--kesar);font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.review figcaption b{display:block}
+.review figcaption small{display:block;font-size:13px;color:var(--mute)}
+.host{display:flex;flex-direction:column;gap:12px}
+.host-top{display:flex;align-items:center;gap:14px}
+.host-top img,.host-logo{width:60px;height:60px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.host-logo{background:var(--ink);border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center}
+.host-logo img{width:52px;height:auto;border-radius:0}
+.host-top b{display:block;font-size:19px}
+.host-top a{font-size:14px;text-decoration:none}
+.stats{display:flex;gap:24px}
+.stats b{display:block;font-size:24px;color:var(--kesar);font-weight:800}
+.stats small{font-size:13px;color:var(--mute)}
+.faq{display:flex;flex-direction:column;gap:10px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.faq summary{list-style:none;display:flex;align-items:center;gap:12px;padding:16px;cursor:pointer;font-weight:700;font-size:16px;min-height:44px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary span{flex:1}
+.faq summary .ico{color:var(--kesar);transition:transform .2s}
+.faq details[open] summary .ico{transform:rotate(45deg)}
+.faq p{padding:0 16px 16px;color:var(--paper-2);font-size:15px}
+
+/* final */
+.final{border-top:1px solid var(--line);background:var(--surface-2);scroll-margin-top:100px}
+.final .wrap{max-width:760px;text-align:center;padding-block:56px}
+.final .kicker{font-family:var(--serif);font-style:italic;font-weight:600;font-size:24px;color:var(--kesar);margin-bottom:6px}
+.final h2{font-size:clamp(28px,7vw,42px);margin-bottom:10px}
+.final .sub{margin-bottom:8px}
+.final .pay-box{background:var(--surface);border:1px solid rgba(242,162,44,.4);border-radius:20px;padding:18px;margin:20px auto 0;max-width:440px}
+footer{border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding-block:20px;font-size:14px;color:var(--mute)}
+
+/* mobile bottom bar */
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--surface);border-top:1px solid rgba(242,162,44,.45);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;justify-content:space-between;gap:12px;transform:translateY(110%);transition:transform .25s}
+.mbar.show{transform:none}
+.mbar .p{font-size:22px;font-weight:800;line-height:1.1}
+.mbar .p s{font-size:14px;color:var(--mute);font-weight:500}
+.mbar .l{font-size:12px;color:#f6c27a;font-variant-numeric:tabular-nums}
+.mbar .btn{border-radius:12px;font-size:16px;padding:10px 20px}
+body{padding-bottom:84px}
+
+@media (min-width:560px){
+  .wrap{padding-inline:24px}
+  .meta{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .grid2,.films,.learn{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bar-date{display:inline}
+  .strip{font-size:14px}
+  .strip .lg{display:inline}
+  .strip .sm{display:none}
+}
+@media (min-width:1000px){
+  .wrap{padding-inline:32px}
+  .brand img{height:30px}
+  .layout{grid-template-columns:minmax(0,1fr) 380px;column-gap:56px;align-items:start}
+  .hero{grid-column:1;grid-row:1;padding-bottom:40px}
+  .side{grid-column:2;grid-row:1/span 2;align-self:stretch}
+  .rest{grid-column:1;grid-row:2;min-width:0}
+  .buy{position:sticky;top:112px;padding:24px}
+  .mbar{display:none}
+  body{padding-bottom:0}
+  .crumb{margin-top:28px}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></symbol>
+  <symbol id="i-time" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></symbol>
+  <symbol id="i-level" viewBox="0 0 24 24"><path d="M5 20v-5M12 20V10M19 20V4"/></symbol>
+  <symbol id="i-dur" viewBox="0 0 24 24"><path d="M7 3h10M7 21h10M8 3c0 5 8 5 8 9s-8 4-8 9M16 3c0 5-8 5-8 9"/></symbol>
+  <symbol id="i-lang" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5M16 4.8a3.5 3.5 0 0 1 0 6.4M18 14.8c1.8.7 3 2.5 3.5 5.2"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M4 18v-5c0-4 2.2-6.6 6-7.5l.7 1.8C8.4 8.2 7.4 9.7 7.3 12H10v6zm9.5 0v-5c0-4 2.2-6.6 6-7.5l.7 1.8c-2.3.9-3.3 2.4-3.4 4.7h2.7v6z"/></symbol>
+</svg>
+
+<header class="top" id="top">
+  <div class="strip" id="strip"><span class="lg">₹499 का webinar सिर्फ़ ₹49 में — यह price आपके लिए <b class="js-hold">10:00</b> तक hold है · Limited seats</span><span class="sm">₹49 price hold: <b class="js-hold">10:00</b> · Limited seats</span></div>
+  <div class="bar">
+    <div class="wrap">
+      <div class="brand"><img src="assets/sarv-media-logo.png" alt="Sarv Media" width="900" height="227"><span>× Jay Patel</span></div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <span class="bar-date">शनि, 10 Oct · रात 8 बजे</span>
+        <a href="#register" class="btn js-pay">सीट बुक करो · ₹49</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb"><a href="https://sarvmedia.com/">Home</a> / Webinars / <span style="color:var(--paper)">AI Cinematic Films</span></div>
+
+  <div class="layout">
+    <section class="hero" id="overview">
+      <div class="badges">
+        <span class="badge live"><span class="dot"></span>LIVE WEBINAR</span>
+        <span class="badge">हिंदी में</span>
+        <span class="badge">Beginner friendly</span>
+      </div>
+      <h1>AI से बनाओ सिनेमा जैसी <em>real</em> फ़िल्में</h1>
+      <p class="lede">Story से final film तक का workflow — live, हिंदी में। Prompt नहीं, <strong>filmmaking</strong> सीखो।</p>
+      <div class="hosts-line">
+        <img src="assets/jay-patel.jpg" alt="Jay Patel" width="44" height="44">
+        <div><b>Jay Patel <span style="color:var(--mute);font-weight:400">×</span> Sarv Media</b><small>42K+ Instagram community · AI film studio</small></div>
+      </div>
+      <div class="meta">
+        <div class="tile"><svg class="ico"><use href="#i-level"/></svg><div><small>Level</small><strong>Beginner friendly</strong></div></div>
+        <div class="tile"><svg class="ico"><use href="#i-cal"/></svg><div><small>Date</small><strong>शनि, 10 Oct 2026</strong></div></div>
+        <div class="tile"><svg class="ico"><use href="#i-time"/></svg><div><small>Time</small><strong>रात 8–10 बजे IST</strong></div></div>
+        <div class="tile"><svg class="ico"><use href="#i-dur"/></svg><div><small>Duration</small><strong>2 घंटे live</strong></div></div>
+        <div class="tile"><svg class="ico"><use href="#i-lang"/></svg><div><small>Language</small><strong>हिंदी</strong></div></div>
+        <div class="tile"><svg class="ico"><use href="#i-video"/></svg><div><small>Mode</small><strong>Zoom पर live + Q&amp;A</strong></div></div>
+      </div>
+      <figure class="hero-film" style="margin:0">
+        <span class="tag">100% AI GENERATED</span>
+        <video src="assets/shot-4.mp4" poster="assets/shot-4.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Sarv Media की AI फ़िल्म का एक shot"></video>
+        <figcaption class="cap">यह shot camera से नहीं, AI से बना है</figcaption>
+      </figure>
+    </section>
+
+    <aside class="side">
+      <div class="buy" id="register">
+        <div class="cd-label js-cd-label">Webinar शुरू होने में</div>
+        <div class="cd" aria-live="off">
+          <div><b class="js-d">00</b><span>दिन</span></div>
+          <div><b class="js-h">00</b><span>घंटे</span></div>
+          <div><b class="js-m">00</b><span>मिनट</span></div>
+          <div><b class="js-s">00</b><span>सेकंड</span></div>
+        </div>
+        <div class="price"><span class="now">₹49</span><s>₹499</s><span class="off">90% OFF</span></div>
+        <p class="price-sub">₹499 का webinar · एक बार payment</p>
+        <div class="hold"><svg class="ico" style="width:18px;height:18px"><use href="#i-clock"/></svg><span class="js-hold-line">₹49 price आपके लिए <b class="js-hold">10:00</b> तक reserved है</span></div>
+
+        <!-- Razorpay payment button #1 (same button ID as #2) -->
+        <div class="rzp"><form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_TkGpobePwrFp00" async> </script> </form></div>
+        <p class="secure"><svg class="ico"><use href="#i-lock"/></svg>Razorpay secure checkout · UPI, GPay, PhonePe, Card</p>
+
+        <div class="steps">
+          <h3>Payment के बाद क्या होगा</h3>
+          <ol>
+            <li><span>1</span>₹49 pay करो — 30 seconds</li>
+            <li><span>2</span>आपको WhatsApp group में add करेंगे</li>
+            <li><span>3</span>Zoom link group में — शनि रात 8 बजे join</li>
+          </ol>
+        </div>
+        <div class="incl">
+          <h3>₹49 में आपको मिलेगा</h3>
+          <ul class="checks">
+            <li><svg class="ico"><use href="#i-check"/></svg>2 घंटे live session, हिंदी में</li>
+            <li><svg class="ico"><use href="#i-check"/></svg>5-step film workflow</li>
+            <li><svg class="ico"><use href="#i-check"/></svg>Live Q&amp;A — आपके project के सवाल</li>
+            <li><svg class="ico"><use href="#i-check"/></svg>Homework + पूरी tool list</li>
+          </ul>
+        </div>
+        <div class="seats"><svg class="ico" style="width:18px;height:18px"><use href="#i-users"/></svg><span><strong>Limited seats available</strong> — ताकि Q&amp;A में सबको time मिले</span></div>
+      </div>
+    </aside>
+
+    <div class="rest">
+      <nav class="tabs" aria-label="Page sections">
+        <a href="#learn" class="on">क्या सीखेंगे</a>
+        <a href="#agenda">Agenda</a>
+        <a href="#films">फ़िल्में</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#hosts">Hosts</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section class="blk" id="learn">
+        <h2>इस webinar में आप क्या सीखेंगे</h2>
+        <p class="sub">Prompt copy-paste नहीं — एक real filmmaker की तरह सोचना।</p>
+        <ul class="learn">
+          <li><svg class="ico"><use href="#i-check"/></svg><span>Brand या brief से <strong>60 second की film</strong> सोचना — hook, emotion, ending</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span>Character और props को <strong>हर shot में consistent</strong> रखना</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span>Scene को shots में तोड़ना + <strong>client-ready storyboard</strong></span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span>Camera angle, movement, lens, lighting — <strong>guess किए बिना</strong></span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span>कौन से tools, कितने <strong>credits का ख़र्च</strong>, बिगड़ी generation कैसे सुधारें</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span>AI ad film के लिए <strong>client से कितना charge</strong> करें</span></li>
+        </ul>
+      </section>
+
+      <section class="blk" id="agenda">
+        <div class="agenda-head">
+          <div><h2>Webinar का agenda</h2><p class="sub" style="margin:0">7 parts · 2 घंटे · Live</p></div>
+          <button type="button" class="ghost" id="toggle-all">सब खोलो</button>
+        </div>
+        <div class="acc">
+          <details open><summary><span class="n">01</span><span class="t"><b>Story — idea से story तक</b><small>Hook · emotion · ending</small></span><svg class="ico chev"><use href="#i-chev"/></svg></summary><p>एक brand या brief से 60 second की film कैसे सोचनी है — पहले 3 seconds का hook, बीच का emotion और याद रहने वाली ending।</p></details>
+          <details><summary><span class="n">02</span><span class="t"><b>Character — हर shot में same</b><small>Consistency</small></span><svg class="ico chev"><use href="#i-chev"/></svg></summary><p>Character, कपड़े और props को हर shot में एक जैसा (consistent) कैसे रखें — ताकि film AI-जैसी नहीं, एक कहानी जैसी लगे।</p></details>
+          <details><summary><span class="n">03</span><span class="t"><b>Shots — storyboard जो client approve करे</b><small>Shot list · storyboard</small></span><svg class="ico chev"><use href="#i-chev"/></svg></summary><p>Scene को shots में तोड़ना और ऐसा storyboard बनाना जो आप client को approval के लिए भेज सको।</p></details>
+          <details><summary><span class="n">04</span><span class="t"><b>Camera &amp; Light — realism कहाँ से आता है</b><small>Angle · movement · lens · lighting</small></span><svg class="ico chev"><use href="#i-chev"/></svg></summary><p>Camera angle, movement, lens और lighting के filmmaking decisions — guess किए बिना। यही चीज़ AI video को cinema जैसा बनाती है।</p></details>
+          <details><summary><span class="n">05</span><span class="t"><b>Generate &amp; Edit — final cut तक</b><small>Tools · credits · fixes · pricing</small></span><svg class="ico chev"><use href="#i-chev"/></svg></summary><p>कौन से tools, एक project में credits का कितना ख़र्च, generation बिगड़ जाए तो कैसे सुधारें — और AI ad film के लिए client से कितना charge करें।</p></details>
+          <details><summary><span class="n">06</span><span class="t"><b>Live Q&amp;A</b><small>आपके सवाल</small></span><svg class="ico chev"><use href="#i-chev"/></svg></summary><p>आपके अपने project के सवाल — live, सीधे Jay और Sarv Media team से।</p></details>
+          <details><summary><span class="n">07</span><span class="t"><b>Homework</b><small>Webinar के बाद</small></span><svg class="ico chev"><use href="#i-chev"/></svg></summary><p>Webinar के बाद अपनी पहली फ़िल्म ख़ुद बनाने का homework + पूरी tool list।</p></details>
+        </div>
+      </section>
+
+      <section class="blk" id="films">
+        <h2>ये फ़िल्में AI से बनी हैं</h2>
+        <p class="sub">हर shot Sarv Media ने AI से बनाया — brands के लिए, real client work।</p>
+        <div class="films">
+          <video src="assets/shot-1.mp4" poster="assets/shot-1.jpg" autoplay muted loop playsinline preload="metadata" aria-label="AI film shot"></video>
+          <video src="assets/shot-2.mp4" poster="assets/shot-2.jpg" autoplay muted loop playsinline preload="metadata" aria-label="AI film shot"></video>
+          <video src="assets/scene-2.mp4" poster="assets/scene-2.jpg" autoplay muted loop playsinline preload="metadata" aria-label="AI film shot"></video>
+          <video src="assets/scene-4b.mp4" poster="assets/scene-4b.jpg" autoplay muted loop playsinline preload="metadata" aria-label="AI film shot"></video>
+        </div>
+      </section>
+
+      <section class="blk" id="reviews">
+        <h2>पिछले webinar के बाद लोगों ने क्या कहा</h2>
+        <p class="sub">हमारे WhatsApp group से।</p>
+        <div class="grid2">
+          <figure class="card review">
+            <svg class="ico" style="width:28px;height:28px;color:var(--kesar)"><use href="#i-quote"/></svg>
+            <blockquote>I had no idea how to determine price quotes for clients, so I learned that in the webinar; the session was excellent and outstanding and thanks to both sir for giving informative knowledge for the current market and I hope an AI filmmaking masterclass launched soon.</blockquote>
+            <figcaption><span class="av">KP</span><span><b>Krish Pawar</b><small>Webinar attendee</small></span></figcaption>
+          </figure>
+          <figure class="card review">
+            <svg class="ico" style="width:28px;height:28px;color:var(--kesar)"><use href="#i-quote"/></svg>
+            <blockquote>I attend workshops every weekend just for learning workflow and ideas — at the end everyone upsells their work which is also very costly. But I find this very helpful, and since I am a filmmaking student always struggling to tell my own stories, I can reach there now with the help of this. Thank you so much for this webinar.</blockquote>
+            <figcaption><span class="av">NK</span><span><b>Nisarg Kalaskar</b><small>Filmmaking student</small></span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="blk" id="who">
+        <h2>यह webinar किसके लिए है?</h2>
+        <div class="grid2" style="margin-top:16px">
+          <div class="card"><h3>Video Editors &amp; Videographers</h3><p>बिना shoot के ad film deliver करके नई service जोड़ो — कम ख़र्च, ज़्यादा margin।</p></div>
+          <div class="card"><h3>Content Creators &amp; Influencers</h3><p>Reels में cinematic storytelling — ऐसा content जो scroll रोक दे।</p></div>
+          <div class="card"><h3>Brand Owners &amp; Agencies</h3><p>Product ad, festive film, launch video — लाखों के budget के बिना, दिनों में।</p></div>
+          <div class="card"><h3>Students &amp; Freelancers</h3><p>AI filmmaking को career बनाना है — शुरुआत कहाँ से करें, साफ़ समझो।</p></div>
+        </div>
+        <p class="not"><strong>किसके लिए नहीं:</strong> जिसे सिर्फ़ prompt copy-paste करके quick viral video चाहिए।</p>
+      </section>
+
+      <section class="blk" id="hosts">
+        <h2>आपके साथ कौन होगा?</h2>
+        <div class="grid2" style="margin-top:16px">
+          <div class="card host">
+            <div class="host-top"><img src="assets/jay-patel.jpg" alt="Jay Patel" width="60" height="60"><div><b>Jay Patel</b><a href="https://www.instagram.com/heyjay.ai/" target="_blank" rel="noopener">@heyjay.ai</a></div></div>
+            <p>AI को आसान बनाते हैं — AI से video, image और content creation सिखाते हैं, live webinars और courses के ज़रिए।</p>
+            <div class="stats"><div><b>42K+</b><small>Instagram community</small></div><div><b>2.5M+</b><small>views</small></div></div>
+          </div>
+          <div class="card host">
+            <div class="host-top"><span class="host-logo"><img src="assets/sarv-media-logo.png" alt=""></span><div><b>Sarv Media</b><a href="https://www.instagram.com/sarv_media_1/" target="_blank" rel="noopener">@sarv_media_1</a></div></div>
+            <p>AI Ad Films &amp; Cinematic Content Studio। इस page की हर फ़िल्म Sarv Media ने AI से बनाई है — real production process, real client work।</p>
+            <a href="https://sarvmedia.com/" target="_blank" rel="noopener" style="font-weight:600;text-decoration:none">sarvmedia.com →</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="blk" id="faq">
+        <h2>अक्सर पूछे जाने वाले सवाल</h2>
+        <div class="faq" style="margin-top:16px">
+          <details open><summary><span>Webinar कब है?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p>शनिवार, 10 October 2026 — रात 8 से 10 बजे (IST)। 2 घंटे live session + Q&amp;A।</p></details>
+          <details><summary><span>किस भाषा में होगा?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p>हिंदी में। Tools और technical terms English में ही बताएँगे, जैसे industry में use होते हैं।</p></details>
+          <details><summary><span>क्या पहले से AI या editing आना ज़रूरी है?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p>नहीं। Webinar beginner friendly है — हम story से शुरू करते हैं, tool से नहीं।</p></details>
+          <details><summary><span>Join कैसे करूँगा?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p>Payment के बाद आपको हमारे WhatsApp group में add किया जाएगा। Zoom link और reminders वहीं मिलेंगे।</p></details>
+          <details><summary><span>Zoom के लिए क्या चाहिए?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p>Phone या laptop पर Zoom app और अच्छा internet — बस इतना।</p></details>
+          <details><summary><span>Payment safe है?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p>हाँ — Razorpay secure checkout। UPI, GPay, PhonePe, card या net banking से pay कर सकते हैं।</p></details>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<section class="final" id="join">
+  <div class="wrap">
+    <p class="kicker">शनिवार रात 8 बजे, live</p>
+    <h2>₹499 का webinar — आज सिर्फ़ ₹49 में</h2>
+    <p class="sub js-cd-inline">Limited seats available</p>
+    <div class="pay-box">
+      <!-- Razorpay payment button #2 (same button ID as #1) -->
+      <div class="rzp"><form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_TkGpobePwrFp00" async> </script> </form></div>
+      <p class="secure" style="margin:0"><svg class="ico"><use href="#i-lock"/></svg>Payment के बाद WhatsApp group में add — Zoom link वहीं मिलेगा</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Sarv Media · with Jay Patel</span>
+    <span>सवाल? <a href="https://www.instagram.com/sarv_media_1/" target="_blank" rel="noopener">@sarv_media_1</a> · <a href="https://www.instagram.com/heyjay.ai/" target="_blank" rel="noopener">@heyjay.ai</a></span>
+  </div>
+</footer>
+
+<div class="mbar" id="mbar">
+  <div><div class="p">₹49 <s>₹499</s></div><div class="l js-mbar">Limited seats available</div></div>
+  <a href="#register" class="btn js-pay">₹49 Pay करो</a>
+</div>
+
+<script>
+(function () {
+  var HOLD_MIN = 10;
+  var START = Date.UTC(2026, 9, 10, 14, 30); // Sat 10 Oct 2026, 8:00 PM IST
+  var END = Date.UTC(2026, 9, 10, 16, 30);
+  var pad = function (n) { return n < 10 ? '0' + n : '' + n; };
+  var $ = function (s) { return document.querySelector(s); };
+  var $$ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
+
+  // Per-visitor price hold, remembered across reloads
+  var holdStart = Date.now();
+  try {
+    var saved = parseInt(localStorage.getItem('sarvWebinarHoldStart'), 10);
+    if (saved && saved <= Date.now()) holdStart = saved;
+    else localStorage.setItem('sarvWebinarHoldStart', String(holdStart));
+  } catch (e) {}
+
+  function tick() {
+    var now = Date.now();
+    var diff = Math.max(0, Math.floor((START - now) / 1000));
+    var d = Math.floor(diff / 86400), h = Math.floor(diff % 86400 / 3600), m = Math.floor(diff % 3600 / 60), s = diff % 60;
+    $('.js-d').textContent = pad(d); $('.js-h').textContent = pad(h);
+    $('.js-m').textContent = pad(m); $('.js-s').textContent = pad(s);
+    var live = now >= START && now < END;
+    $('.js-cd-label').textContent = live ? 'Webinar अभी live है' : (now >= END ? 'यह webinar हो चुका है' : 'Webinar शुरू होने में');
+    $('.js-cd-inline').textContent = live ? 'Webinar अभी live चल रहा है · Limited seats available'
+      : (now >= END ? 'यह webinar हो चुका है' : d + ' दिन ' + pad(h) + ':' + pad(m) + ':' + pad(s) + ' में शुरू · Limited seats available');
+
+    var left = Math.max(0, Math.floor((holdStart + HOLD_MIN * 60000 - now) / 1000));
+    var mmss = pad(Math.floor(left / 60)) + ':' + pad(left % 60);
+    if (left > 0) {
+      $$('.js-hold').forEach(function (el) { el.textContent = mmss; });
+      $('.js-mbar').textContent = '₹49 hold: ' + mmss;
+    } else {
+      $('#strip').textContent = '₹499 का webinar सिर्फ़ ₹49 में · Limited seats available — अभी book करो';
+      $('.js-hold-line').textContent = 'Limited seats available — भरने से पहले book करो';
+      $('.js-mbar').textContent = 'Limited seats available';
+    }
+  }
+  tick(); setInterval(tick, 1000);
+
+  // Sticky tabs sit under the header
+  function setTopH() { document.documentElement.style.setProperty('--top-h', $('#top').offsetHeight + 'px'); }
+  setTopH(); window.addEventListener('resize', setTopH);
+
+  // Header / bottom-bar "Pay" buttons: open Razorpay directly if its button is reachable, else jump to the pay card
+  $$('.js-pay').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var rzpBtn = document.querySelector('.rzp form button, .rzp form a, .rzp form input[type=submit]');
+      e.preventDefault();
+      if (rzpBtn) { rzpBtn.click(); return; }
+      var card = $('#register');
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      card.classList.add('flash'); setTimeout(function () { card.classList.remove('flash'); }, 1600);
+    });
+  });
+
+  // Mobile bar: show once the pay card has scrolled out of view
+  var mbar = $('#mbar');
+  if ('IntersectionObserver' in window) {
+    var seen = {};
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { seen[en.target.id] = en.isIntersecting; });
+      mbar.classList.toggle('show', !seen.register && !seen.join && window.scrollY > 300);
+    });
+    io.observe($('#register')); io.observe($('#join'));
+    window.addEventListener('scroll', function () {
+      mbar.classList.toggle('show', !seen.register && !seen.join && window.scrollY > 300);
+    }, { passive: true });
+  } else { mbar.classList.add('show'); }
+
+  // Agenda: open / close all
+  var btn = $('#toggle-all'), items = $$('#agenda details');
+  function sync() { btn.textContent = items.every(function (d) { return d.open; }) ? 'सब बंद करो' : 'सब खोलो'; }
+  btn.addEventListener('click', function () { var open = !items.every(function (d) { return d.open; }); items.forEach(function (d) { d.open = open; }); sync(); });
+  items.forEach(function (d) { d.addEventListener('toggle', sync); });
+
+  // Highlight the current section tab
+  var tabs = $$('.tabs a');
+  if ('IntersectionObserver' in window) {
+    var so = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) tabs.forEach(function (t) { t.classList.toggle('on', t.getAttribute('href') === '#' + en.target.id); });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    tabs.forEach(function (t) { var s = $(t.getAttribute('href')); if (s) so.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
