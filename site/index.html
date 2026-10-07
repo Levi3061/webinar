@@ -36,16 +36,17 @@ h1,h2,h3,p{margin:0}
 
 /* top */
 .top{position:sticky;top:0;z-index:40}
-.strip{background:var(--kesar);color:var(--on-kesar);font-size:13px;font-weight:600;text-align:center;padding:6px 12px;line-height:1.35}
+.strip{background:var(--kesar);color:var(--on-kesar);font-size:12.5px;font-weight:600;text-align:center;padding:6px 12px;line-height:1.35}
 .strip b{font-variant-numeric:tabular-nums;background:var(--on-kesar);color:var(--kesar);padding:1px 7px;border-radius:5px;white-space:nowrap}
 .strip .lg{display:none}
 .bar{background:rgba(11,10,8,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-block:8px}
 .brand{display:flex;align-items:center;gap:10px;min-width:0}
-.brand img{height:24px;width:auto}
-.brand span,.bar-date{font-size:14px;color:var(--dim);white-space:nowrap}
+.brand img{height:22px;width:auto}
+.brand span{font-size:12px;color:var(--dim);white-space:nowrap}
+.bar-date{font-size:14px;color:var(--dim);white-space:nowrap}
 .bar-date{display:none}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--kesar);color:var(--on-kesar);text-decoration:none;font-weight:800;border-radius:999px;min-height:44px;padding:8px 18px;font-size:15px;border:0;cursor:pointer;font-family:inherit;transition:background .15s,transform .15s;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--kesar);color:var(--on-kesar);text-decoration:none;font-weight:800;border-radius:999px;min-height:40px;padding:8px 14px;font-size:14px;border:0;cursor:pointer;font-family:inherit;transition:background .15s,transform .15s;white-space:nowrap}
 .btn:hover{background:var(--kesar-hi);color:var(--on-kesar);transform:translateY(-1px)}
 
 /* layout */
@@ -58,9 +59,9 @@ h1,h2,h3,p{margin:0}
 .badge.live{background:rgba(229,72,77,.15);color:#ff8a8d;letter-spacing:.08em}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 1.6s ease-in-out infinite}
 @keyframes pulse{50%{opacity:.3}}
-h1{font-size:clamp(34px,8.6vw,56px);line-height:1.14;font-weight:800;letter-spacing:-.01em;margin-bottom:12px}
+h1{font-size:clamp(30px,7.6vw,56px);line-height:1.18;font-weight:800;letter-spacing:-.01em;margin-bottom:12px}
 h1 em{font-family:var(--serif);font-weight:600;color:var(--kesar)}
-.lede{font-size:clamp(17px,4.4vw,20px);color:var(--paper-2);max-width:620px;margin-bottom:20px}
+.lede{font-size:clamp(16px,4.1vw,20px);color:var(--paper-2);max-width:620px;margin-bottom:20px}
 .lede strong{color:var(--paper)}
 .hosts-line{display:flex;align-items:center;gap:12px;margin-bottom:22px;font-size:15px;line-height:1.35}
 .hosts-line img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--kesar)}
@@ -82,10 +83,10 @@ h1 em{font-family:var(--serif);font-weight:600;color:var(--kesar)}
 .cd-label{font-size:14px;font-weight:600;color:var(--dim);margin-bottom:8px}
 .cd{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:20px}
 .cd div{background:var(--ink);border:1px solid var(--line);border-radius:12px;padding:8px 2px;text-align:center}
-.cd b{display:block;font-size:26px;font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums}
+.cd b{display:block;font-size:clamp(22px,6vw,26px);font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums}
 .cd span{font-size:12px;color:var(--mute)}
 .price{display:flex;align-items:baseline;flex-wrap:wrap;gap:10px}
-.price .now{font-size:46px;font-weight:800;line-height:1}
+.price .now{font-size:clamp(38px,10vw,46px);font-weight:800;line-height:1}
 .price s{font-size:22px;color:var(--mute);font-weight:600}
 .price .off{font-size:14px;font-weight:800;color:var(--on-kesar);background:var(--kesar);padding:3px 9px;border-radius:6px;align-self:center}
 .price-sub{font-size:14px;color:var(--mute);margin:4px 0 14px}
@@ -113,7 +114,7 @@ h1 em{font-family:var(--serif);font-weight:600;color:var(--kesar)}
 .tabs a{color:var(--dim);text-decoration:none;font-weight:600;font-size:15px;padding:12px;white-space:nowrap;border-bottom:2px solid transparent}
 .tabs a.on{color:var(--paper);border-bottom-color:var(--kesar)}
 section.blk{margin-bottom:56px;scroll-margin-top:150px}
-h2{font-size:clamp(26px,6.4vw,32px);line-height:1.2;font-weight:800;margin-bottom:6px}
+h2{font-size:clamp(24px,6vw,32px);line-height:1.2;font-weight:800;margin-bottom:6px}
 .sub{color:var(--dim);font-size:16px;margin-bottom:20px}
 .learn{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;list-style:none;margin:0}
 .learn li{display:flex;gap:12px;font-size:16px}
@@ -127,7 +128,7 @@ h2{font-size:clamp(26px,6.4vw,32px);line-height:1.2;font-weight:800;margin-botto
 .acc summary::-webkit-details-marker{display:none}
 .acc .n{font-size:14px;font-weight:800;color:var(--kesar);min-width:24px;font-variant-numeric:tabular-nums}
 .acc .t{flex:1;min-width:0}
-.acc .t b{display:block;font-size:17px;line-height:1.35}
+.acc .t b{display:block;font-size:16px;line-height:1.35}
 .acc .t small{display:block;font-size:13px;color:var(--mute)}
 .acc .chev{transition:transform .2s}
 .acc details[open] .chev{transform:rotate(180deg)}
@@ -175,14 +176,6 @@ h2{font-size:clamp(26px,6.4vw,32px);line-height:1.2;font-weight:800;margin-botto
 footer{border-top:1px solid var(--line)}
 footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding-block:20px;font-size:14px;color:var(--mute)}
 
-/* mobile bottom bar */
-.mbar{position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--surface);border-top:1px solid rgba(242,162,44,.45);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;justify-content:space-between;gap:12px;transform:translateY(110%);transition:transform .25s}
-.mbar.show{transform:none}
-.mbar .p{font-size:22px;font-weight:800;line-height:1.1}
-.mbar .p s{font-size:14px;color:var(--mute);font-weight:500}
-.mbar .l{font-size:12px;color:#f6c27a;font-variant-numeric:tabular-nums}
-.mbar .btn{border-radius:12px;font-size:16px;padding:10px 20px}
-body{padding-bottom:84px}
 
 @media (min-width:560px){
   .wrap{padding-inline:24px}
@@ -190,6 +183,8 @@ body{padding-bottom:84px}
   .grid2,.films,.learn{grid-template-columns:repeat(2,minmax(0,1fr))}
   .bar-date{display:inline}
   .strip{font-size:14px}
+  .brand span{font-size:14px}
+  .btn{font-size:15px;padding:8px 18px;min-height:44px}
   .strip .lg{display:inline}
   .strip .sm{display:none}
 }
@@ -201,8 +196,6 @@ body{padding-bottom:84px}
   .side{grid-column:2;grid-row:1/span 2;align-self:stretch}
   .rest{grid-column:1;grid-row:2;min-width:0}
   .buy{position:sticky;top:112px;padding:24px}
-  .mbar{display:none}
-  body{padding-bottom:0}
   .crumb{margin-top:28px}
 }
 </style>
@@ -435,10 +428,6 @@ body{padding-bottom:84px}
   </div>
 </footer>
 
-<div class="mbar" id="mbar">
-  <div><div class="p">₹49 <s>₹499</s></div><div class="l js-mbar">Limited seats available</div></div>
-  <a href="#register" class="btn js-pay">₹49 Pay करो</a>
-</div>
 
 <script>
 (function () {
@@ -472,11 +461,9 @@ body{padding-bottom:84px}
     var mmss = pad(Math.floor(left / 60)) + ':' + pad(left % 60);
     if (left > 0) {
       $$('.js-hold').forEach(function (el) { el.textContent = mmss; });
-      $('.js-mbar').textContent = '₹49 hold: ' + mmss;
     } else {
       $('#strip').textContent = '₹499 का webinar सिर्फ़ ₹49 में · Limited seats available — अभी book करो';
       $('.js-hold-line').textContent = 'Limited seats available — भरने से पहले book करो';
-      $('.js-mbar').textContent = 'Limited seats available';
     }
   }
   tick(); setInterval(tick, 1000);
@@ -485,7 +472,7 @@ body{padding-bottom:84px}
   function setTopH() { document.documentElement.style.setProperty('--top-h', $('#top').offsetHeight + 'px'); }
   setTopH(); window.addEventListener('resize', setTopH);
 
-  // Header / bottom-bar "Pay" buttons: open Razorpay directly if its button is reachable, else jump to the pay card
+  // Header "Pay" button: open Razorpay directly if its button is reachable, else jump to the pay card
   $$('.js-pay').forEach(function (a) {
     a.addEventListener('click', function (e) {
       var rzpBtn = document.querySelector('.rzp form button, .rzp form a, .rzp form input[type=submit]');
@@ -496,20 +483,6 @@ body{padding-bottom:84px}
       card.classList.add('flash'); setTimeout(function () { card.classList.remove('flash'); }, 1600);
     });
   });
-
-  // Mobile bar: show once the pay card has scrolled out of view
-  var mbar = $('#mbar');
-  if ('IntersectionObserver' in window) {
-    var seen = {};
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) { seen[en.target.id] = en.isIntersecting; });
-      mbar.classList.toggle('show', !seen.register && !seen.join && window.scrollY > 300);
-    });
-    io.observe($('#register')); io.observe($('#join'));
-    window.addEventListener('scroll', function () {
-      mbar.classList.toggle('show', !seen.register && !seen.join && window.scrollY > 300);
-    }, { passive: true });
-  } else { mbar.classList.add('show'); }
 
   // Agenda: open / close all
   var btn = $('#toggle-all'), items = $$('#agenda details');
