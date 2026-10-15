@@ -1,6 +1,6 @@
 # AI Ad Films & Cinematic Films Webinar — landing page
 
-Static site served by a Cloudflare Worker at **https://gujjuwithjp.sarvmedia.com/** (config: `../wrangler.jsonc`).
+Static site served by a Cloudflare Worker at **https://heyjay.sarvmedia.com/** (config: `../wrangler.jsonc`).
 
 - `index.html` — landing page: Jay's intro video, ₹99 price card, booking form (Razorpay Checkout)
 - `thank-you.html` — shown after a verified payment; opens the WhatsApp group (the link comes from the

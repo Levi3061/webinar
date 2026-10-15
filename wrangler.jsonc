@@ -8,6 +8,6 @@
     "not_found_handling": "404-page"
   },
   "routes": [
-    { "pattern": "gujjuwithjp.sarvmedia.com", "custom_domain": true }
+    { "pattern": "heyjay.sarvmedia.com", "custom_domain": true }
   ]
 }
