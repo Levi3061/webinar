@@ -130,6 +130,10 @@ body.lock{overflow:hidden}
 .book input:focus{outline:2px solid var(--kesar);outline-offset:0;border-color:transparent}
 .book .pay{border-radius:14px;font-size:18px;min-height:54px;margin-top:4px;width:100%}
 .book .pay[disabled]{opacity:.7;cursor:wait;transform:none}
+[hidden]{display:none!important}
+.closed{background:rgba(229,72,77,.10);border:1px solid rgba(229,72,77,.4);border-radius:14px;padding:16px;text-align:center;margin-bottom:16px}
+.closed b{display:block;font-size:19px;color:#ffd0d1;margin-bottom:4px}
+.closed p{margin:0;font-size:15px;color:var(--paper-2)}
 .form-msg{font-size:14px;color:#f6c27a;text-align:center;min-height:0;margin:0}
 .form-msg:empty{display:none}
 .secure{display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px;color:var(--mute);text-align:center;margin-bottom:18px}
@@ -351,6 +355,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
         </div>
         <div class="hold"><svg class="ico" style="width:18px;height:18px"><use href="#i-clock"/></svg><span class="js-hold-line">₹99 price आपके लिए <b class="js-hold">10:00</b> तक reserved है</span></div>
 
+        <div class="closed" id="closed" hidden>
+          <b>Bookings बंद हो गई हैं</b>
+          <p>यह webinar शुरू हो चुका है। अगले webinar की खबर के लिए Instagram पर <a href="https://www.instagram.com/heyjay.ai/" target="_blank" rel="noopener">@heyjay.ai</a> follow करो।</p>
+        </div>
         <form class="book" id="book" novalidate>
           <label>आपका नाम<input name="name" autocomplete="name" required></label>
           <label>Email<input name="email" type="email" autocomplete="email" inputmode="email" required></label>
@@ -574,6 +582,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
     $('.js-cd-inline').textContent = live ? 'Webinar अभी live चल रहा है · Limited seats available'
       : (now >= END ? 'यह webinar हो चुका है' : d + ' दिन ' + pad(h) + ':' + pad(m) + ':' + pad(s) + ' में शुरू · Limited seats available');
 
+    if (now >= START) { closeBookings(); return; }
     var left = Math.max(0, Math.floor((holdStart + HOLD_MIN * 60000 - now) / 1000));
     var mmss = pad(Math.floor(left / 60)) + ':' + pad(left % 60);
     if (left > 0) {
@@ -582,6 +591,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
       $('#strip').textContent = '₹2,999 का webinar सिर्फ़ ₹99 में · Limited seats available — अभी book करो';
       $('.js-hold-line').textContent = 'Limited seats available — भरने से पहले book करो';
     }
+  }
+  // Bookings close when the webinar starts (the Apps Script refuses new orders after that too)
+  var isClosed = false;
+  function closeBookings() {
+    if (isClosed) return; isClosed = true;
+    $('#strip').textContent = 'Bookings बंद हो गई हैं — webinar शुरू हो चुका है';
+    $('.hold').hidden = true; $('#book').hidden = true; $('.steps').hidden = true; $('#register .secure').hidden = true; $('#closed').hidden = false;
+    $$('.js-pay').forEach(function (a) { a.textContent = 'Bookings बंद'; a.setAttribute('aria-disabled', 'true'); a.style.opacity = '.6'; });
   }
   tick(); setInterval(tick, 1000);
 
@@ -629,6 +646,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
     data.action = 'order';
     Promise.all([api(data), loadCheckout()]).then(function (res) {
       var o = res[0];
+      if (!o.ok && o.error === 'bookings closed') { closeBookings(); return; }
       if (!o.ok) throw new Error(o.error);
       var paid = false;
       var rzp = new window.Razorpay({
@@ -660,6 +678,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
   }
   form.addEventListener('submit', function (e) {
     e.preventDefault();
+    if (Date.now() >= START) { closeBookings(); return; }
     var d = Object.fromEntries(new FormData(form));
     d.phone = (d.phone || '').replace(/[^\d]/g, '').replace(/^(91|0)(?=\d{10}$)/, '');
     if (!d.name.trim()) { msg.textContent = 'अपना नाम लिखो।'; form.name.focus(); return; }

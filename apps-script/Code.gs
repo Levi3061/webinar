@@ -22,6 +22,7 @@
 
 const SHEET_NAME = 'Registrations';
 const AMOUNT_PAISE = 9900;                       // ₹99
+const BOOKINGS_CLOSE = new Date('2026-10-23T14:30:00Z');   // 8:00 PM IST, when the webinar starts
 const WEBINAR = 'AI Ad Films & Cinematic Films Webinar';
 const WHEN_TEXT = 'शुक्रवार, 23 October 2026 · रात 8–10 बजे (IST) · Zoom पर live';
 const CAL_DATES = '20261023T143000Z/20261023T163000Z';
@@ -51,6 +52,7 @@ function doPost(e) {
 
 /* ---------- 1. create order ---------- */
 function createOrder_(p) {
+  if (new Date() >= BOOKINGS_CLOSE) return { ok: false, error: 'bookings closed' };
   const name = clean_(p.name, 80), email = clean_(p.email, 120).toLowerCase();
   const phone = String(p.phone || '').replace(/\D/g, '').slice(-10), city = clean_(p.city, 60);
   if (!name || !/^\S+@\S+\.\S+$/.test(email) || !/^[6-9]\d{9}$/.test(phone)) {
