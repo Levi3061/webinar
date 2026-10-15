@@ -89,6 +89,15 @@ h1 em{font-family:var(--serif);font-weight:600;color:var(--kesar)}
 
 /* buy card */
 .buy{background:var(--surface);border:1px solid rgba(242,162,44,.4);border-radius:20px;padding:20px 18px;box-shadow:0 24px 60px rgba(0,0,0,.45);margin-bottom:40px;scroll-margin-top:110px;transition:box-shadow .3s}
+.confirming{position:fixed;inset:0;z-index:100;background:var(--ink);display:flex;align-items:center;justify-content:center;padding:24px;text-align:center}
+.confirming[hidden]{display:none}
+.confirming .box{max-width:420px}
+.spin{width:56px;height:56px;border-radius:50%;border:5px solid rgba(242,162,44,.25);border-top-color:var(--kesar);margin:0 auto 20px;animation:spin .9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.confirming h2{font-size:24px;margin:0 0 10px}
+.confirming p{color:var(--paper-2);font-size:16px;margin:0 0 16px}
+.dont{display:flex;flex-direction:column;gap:8px;background:rgba(229,72,77,.12);border:1px solid rgba(229,72,77,.4);border-radius:14px;padding:14px;font-weight:700;color:#ffd0d1;font-size:16px}
+body.lock{overflow:hidden}
 .buy.flash{box-shadow:0 0 0 3px var(--kesar),0 24px 60px rgba(0,0,0,.45)}
 .cd-label{font-size:14px;font-weight:600;color:var(--dim);margin-bottom:8px}
 .cd{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:20px}
@@ -230,12 +239,24 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
   .hero{grid-column:1;grid-row:1;padding-bottom:40px}
   .side{grid-column:2;grid-row:1/span 2;align-self:stretch}
   .rest{grid-column:1;grid-row:2;min-width:0}
-  .buy{position:sticky;top:112px;padding:24px}
+  .buy{padding:24px}
   .crumb{margin-top:28px}
 }
 </style>
 </head>
 <body>
+<div class="confirming" id="confirming" hidden role="alertdialog" aria-modal="true" aria-labelledby="confirming-title">
+  <div class="box">
+    <div class="spin" aria-hidden="true"></div>
+    <h2 id="confirming-title">Payment मिल गया — seat confirm हो रही है</h2>
+    <p>बस कुछ seconds, फिर WhatsApp group वाला page अपने आप खुलेगा।</p>
+    <div class="dont">
+      <span>⚠ Page scroll मत करो</span>
+      <span>⚠ Back button मत दबाओ</span>
+      <span>⚠ Refresh मत करो</span>
+    </div>
+  </div>
+</div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></symbol>
@@ -602,12 +623,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
         handler: function (r) {
           paid = true;
           payBtn.textContent = 'Payment confirm हो रहा है...';
+          $('#confirming').hidden = false; document.body.classList.add('lock');
+          var leaving = false;
+          function go() { if (leaving) return; leaving = true; window.removeEventListener('beforeunload', warn); location.href = 'thank-you.html'; }
+          function warn(ev) { ev.preventDefault(); ev.returnValue = ''; }
+          window.addEventListener('beforeunload', warn);
+          setTimeout(go, 25000); // never leave them stuck: the email (webhook) still carries the group link
           api({ action: 'verify', order_id: r.razorpay_order_id, payment_id: r.razorpay_payment_id, signature: r.razorpay_signature })
             .then(function (v) {
               try { sessionStorage.setItem('webinarBooking', JSON.stringify({ ok: !!v.ok, group: v.group_link || '', name: o.name })); } catch (e) {}
-              location.href = 'thank-you.html';
+              go();
             })
-            .catch(function () { location.href = 'thank-you.html'; }); // payment went through; the webhook email still arrives
+            .catch(go); // payment went through; the webhook email still carries the group link
         },
         modal: { ondismiss: function () { if (!paid) reset('Payment complete नहीं हुआ — फिर से try करो।'); } }
       });
