@@ -13,12 +13,40 @@
 <meta property="og:image" content="https://heyjay.sarvmedia.com/assets/jay-intro.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0b0a08">
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1636113441207246');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" alt=""
+src="https://www.facebook.com/tr?id=1636113441207246&ev=PageView&noscript=1"></noscript>
+<!-- End Meta Pixel -->
 <!-- Google Analytics 4: paste your Measurement ID (G-...) below; nothing loads while it is empty -->
 <script>
   window.GA_ID = '';
   window.dataLayer = window.dataLayer || [];
   window.gtag = function () { dataLayer.push(arguments); };
-  window.track = function (name, params) { if (window.GA_ID) gtag('event', name, params || {}); };
+  // One call sends each booking step to Google Analytics and the Meta Pixel
+  var FB_EVENTS = { begin_checkout: 'InitiateCheckout', purchase: 'Purchase' };
+  window.track = function (name, params) {
+    params = params || {};
+    if (window.GA_ID) gtag('event', name, params);
+    if (window.fbq) {
+      var fbStd = FB_EVENTS[name];
+      var fbParams = params.value ? { value: params.value, currency: params.currency || 'INR', content_name: 'Webinar 23 Oct' } : {};
+      var opts = params.transaction_id ? { eventID: params.transaction_id } : undefined;
+      if (fbStd) fbq('track', fbStd, fbParams, opts);
+      else fbq('trackCustom', name.replace(/(^|_)(\w)/g, function (m, s, c) { return c.toUpperCase(); }), fbParams);
+    }
+  };
   if (window.GA_ID) {
     var g = document.createElement('script'); g.async = true;
     g.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.GA_ID;
