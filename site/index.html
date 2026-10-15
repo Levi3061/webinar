@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>AI Cinematic Films Webinar — Sarv Media × Jay Patel</title>
-<meta name="description" content="AI से सिनेमा जैसी real फ़िल्में बनाना सीखो — live webinar, हिंदी में। शनिवार 10 Oct, रात 8–10 बजे, Zoom पर। ₹499 का webinar सिर्फ़ ₹49 में।">
-<meta property="og:title" content="AI से बनाओ सिनेमा जैसी real फ़िल्में — Live Webinar">
-<meta property="og:description" content="शनिवार 10 Oct, रात 8–10 बजे · Zoom पर live, हिंदी में · ₹499 का webinar सिर्फ़ ₹49 में।">
+<title>AI Ad Films &amp; Cinematic Films Webinar — Sarv Media × Jay Patel</title>
+<meta name="description" content="AI से Ad Films और सिनेमा जैसी real फ़िल्में बनाना सीखो — live webinar, हिंदी में। शुक्रवार 23 Oct, रात 8–10 बजे, Zoom पर। ₹2,999 का webinar सिर्फ़ ₹99 में + 2 cheat sheets FREE।">
+<meta property="og:title" content="AI से बनाओ Ad Films और सिनेमा जैसी real फ़िल्में — Live Webinar">
+<meta property="og:description" content="शुक्रवार 23 Oct, रात 8–10 बजे · Zoom पर live, हिंदी में · ₹2,999 का webinar सिर्फ़ ₹99 में + 2 cheat sheets FREE।">
 <link rel="canonical" href="https://gujjuaiwithjp.com/webinar/">
 <meta property="og:url" content="https://gujjuaiwithjp.com/webinar/">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://gujjuaiwithjp.com/webinar/assets/shot-4.jpg">
+<meta property="og:image" content="https://gujjuaiwithjp.com/webinar/assets/jay-intro.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0b0a08">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -77,7 +77,13 @@ h1 em{font-family:var(--serif);font-weight:600;color:var(--kesar)}
 .tile strong{display:block;font-size:15px;line-height:1.3}
 .hero-film{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line-2);aspect-ratio:16/9;background:var(--surface)}
 .hero-film video{width:100%;height:100%;object-fit:cover}
-.hero-film::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.8));pointer-events:none}
+.intro{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line-2);aspect-ratio:16/9;background:var(--surface);margin:0 0 22px}
+.intro video{width:100%;height:100%;object-fit:cover;background:#000}
+.play{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:flex-end;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.5));border:0;cursor:pointer;padding:14px;width:100%}
+.play span{width:60px;height:60px;border-radius:50%;background:var(--kesar);color:var(--on-kesar);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(0,0,0,.5);transition:transform .15s}
+.play:hover span{transform:scale(1.06)}
+.play svg{width:26px;height:26px;margin-left:4px;fill:currentColor}
+.play[hidden]{display:none}
 .tag{position:absolute;left:12px;top:12px;z-index:1;background:rgba(0,0,0,.6);font-size:11px;font-weight:800;letter-spacing:.06em;padding:4px 9px;border-radius:999px}
 .cap{position:absolute;left:14px;right:14px;bottom:10px;z-index:1;font-size:14px;font-weight:700}
 
@@ -96,8 +102,19 @@ h1 em{font-family:var(--serif);font-weight:600;color:var(--kesar)}
 .price-sub{font-size:14px;color:var(--mute);margin:4px 0 14px}
 .hold{display:flex;align-items:center;gap:10px;background:rgba(242,162,44,.10);border:1px dashed rgba(242,162,44,.55);border-radius:12px;padding:10px 12px;margin-bottom:16px;font-size:14px;color:#f6c27a}
 .hold b{color:var(--kesar);font-variant-numeric:tabular-nums}
-.rzp{display:flex;justify-content:center;align-items:center;min-height:72px;margin:0;padding:14px 0}
-.rzp form{margin:0;transform:scale(1.35);transform-origin:center}
+.value{background:var(--ink);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:14px;font-size:14px;color:var(--paper-2)}
+.value div{display:flex;justify-content:space-between;gap:10px;padding:3px 0}
+.value s{color:var(--mute)}
+.value .tot{border-top:1px dashed var(--line-2);margin-top:4px;padding-top:7px;font-weight:700;color:var(--paper)}
+.value .tot b{color:var(--kesar)}
+.book{display:flex;flex-direction:column;gap:10px;margin:0 0 10px}
+.book label{display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:600;color:var(--dim)}
+.book input{font:inherit;font-size:16px;color:var(--paper);background:var(--ink);border:1px solid var(--line-2);border-radius:10px;padding:11px 12px;min-height:46px;width:100%}
+.book input:focus{outline:2px solid var(--kesar);outline-offset:0;border-color:transparent}
+.book .pay{border-radius:14px;font-size:18px;min-height:54px;margin-top:4px;width:100%}
+.book .pay[disabled]{opacity:.7;cursor:wait;transform:none}
+.form-msg{font-size:14px;color:#f6c27a;text-align:center;min-height:0;margin:0}
+.form-msg:empty{display:none}
 .secure{display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px;color:var(--mute);text-align:center;margin-bottom:18px}
 .secure .ico{width:14px;height:14px}
 .steps{background:var(--ink);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:16px}
@@ -138,6 +155,18 @@ h2{font-size:clamp(24px,6vw,32px);line-height:1.2;font-weight:800;margin-bottom:
 .acc details[open] .chev{transform:rotate(180deg)}
 .acc p{padding:0 16px 18px 54px;color:var(--paper-2);font-size:16px}
 .films{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+.films .wide{grid-column:1/-1}
+.bonus{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+.bcard{background:var(--surface);border:1px solid rgba(242,162,44,.35);border-radius:18px;padding:16px;display:flex;gap:16px;align-items:center}
+.bcard img{width:112px;height:auto;flex-shrink:0;border-radius:6px}
+.bcard small{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--kesar);margin-bottom:4px}
+.bcard h3{font-size:18px;line-height:1.3;margin-bottom:6px}
+.bcard p{color:var(--dim);font-size:14px;margin-bottom:10px}
+.worth{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.worth s{color:var(--mute);font-weight:600}
+.free{background:#1f7a3a;color:#fff;font-weight:800;font-size:13px;padding:3px 10px;border-radius:6px;letter-spacing:.04em}
+.bonus-note{margin-top:14px;font-size:15px;color:var(--dim)}
+.bonus-note strong{color:var(--paper)}
 .films video{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:14px;background:var(--surface)}
 .grid2{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px}
@@ -184,7 +213,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
 @media (min-width:560px){
   .wrap{padding-inline:24px}
   .meta{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .grid2,.films,.learn{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid2,.films,.learn,.bonus{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bcard{flex-direction:column;align-items:flex-start}
+  .bcard img{width:100%;max-width:220px;align-self:center}
   .bar-date{display:inline}
   .strip{font-size:14px}
   .brand span{font-size:14px}
@@ -222,20 +253,20 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
 </svg>
 
 <header class="top" id="top">
-  <div class="strip" id="strip"><span class="lg">₹499 का webinar सिर्फ़ ₹49 में — यह price आपके लिए <b class="js-hold">10:00</b> तक hold है · Limited seats</span><span class="sm">₹49 price hold: <b class="js-hold">10:00</b> · Limited seats</span></div>
+  <div class="strip" id="strip"><span class="lg">₹2,999 का webinar सिर्फ़ ₹99 में — यह price आपके लिए <b class="js-hold">10:00</b> तक hold है · Limited seats</span><span class="sm">₹99 price hold: <b class="js-hold">10:00</b> · Limited seats</span></div>
   <div class="bar">
     <div class="wrap">
       <div class="brand"><img src="assets/sarv-media-logo.png" alt="Sarv Media" width="900" height="227"><span>× Jay Patel</span></div>
       <div style="display:flex;align-items:center;gap:16px">
-        <span class="bar-date">शनि, 10 Oct · रात 8 बजे</span>
-        <a href="#register" class="btn js-pay">सीट बुक करो · ₹49</a>
+        <span class="bar-date">शुक्र, 23 Oct · रात 8 बजे</span>
+        <a href="#register" class="btn js-pay">सीट बुक करो · ₹99</a>
       </div>
     </div>
   </div>
 </header>
 
 <main class="wrap">
-  <div class="crumb"><a href="https://gujjuaiwithjp.com/">Home</a> / Webinars / <span style="color:var(--paper)">AI Cinematic Films</span></div>
+  <div class="crumb"><a href="https://gujjuaiwithjp.com/">Home</a> / Webinars / <span style="color:var(--paper)">AI Ad &amp; Cinematic Films</span></div>
 
   <div class="layout">
     <section class="hero" id="overview">
@@ -244,25 +275,24 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
         <span class="badge">हिंदी में</span>
         <span class="badge">Beginner friendly</span>
       </div>
-      <h1>AI से बनाओ सिनेमा जैसी <em>real</em> फ़िल्में</h1>
-      <p class="lede">Story से final film तक का workflow — live, हिंदी में। Prompt नहीं, <strong>filmmaking</strong> सीखो।</p>
+      <h1>AI से बनाओ Ad Films और सिनेमा जैसी <em>real</em> फ़िल्में</h1>
+      <p class="lede">Brand के लिए ad film हो या अपनी cinematic कहानी — story से final film तक का workflow, live, हिंदी में। Prompt नहीं, <strong>filmmaking</strong> सीखो।</p>
+      <figure class="intro">
+        <video id="intro-video" src="assets/jay-intro.mp4" poster="assets/jay-intro.jpg" preload="none" playsinline aria-label="Jay Patel का webinar intro video"></video>
+        <button type="button" class="play" id="intro-play" aria-label="Video चलाओ"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></span></button>
+      </figure>
       <div class="hosts-line">
         <img src="assets/jay-patel.jpg" alt="Jay Patel" width="44" height="44">
         <div><b>Jay Patel <span style="color:var(--mute);font-weight:400">×</span> Sarv Media</b><small>42K+ Instagram community · AI film studio</small></div>
       </div>
       <div class="meta">
         <div class="tile"><svg class="ico"><use href="#i-level"/></svg><div><small>Level</small><strong>Beginner friendly</strong></div></div>
-        <div class="tile"><svg class="ico"><use href="#i-cal"/></svg><div><small>Date</small><strong>शनि, 10 Oct 2026</strong></div></div>
+        <div class="tile"><svg class="ico"><use href="#i-cal"/></svg><div><small>Date</small><strong>शुक्र, 23 Oct 2026</strong></div></div>
         <div class="tile"><svg class="ico"><use href="#i-time"/></svg><div><small>Time</small><strong>रात 8–10 बजे IST</strong></div></div>
         <div class="tile"><svg class="ico"><use href="#i-dur"/></svg><div><small>Duration</small><strong>2 घंटे live</strong></div></div>
         <div class="tile"><svg class="ico"><use href="#i-lang"/></svg><div><small>Language</small><strong>हिंदी</strong></div></div>
         <div class="tile"><svg class="ico"><use href="#i-video"/></svg><div><small>Mode</small><strong>Zoom पर live + Q&amp;A</strong></div></div>
       </div>
-      <figure class="hero-film" style="margin:0">
-        <span class="tag">100% AI GENERATED</span>
-        <video src="assets/shot-4.mp4" poster="assets/shot-4.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Sarv Media की AI फ़िल्म का एक shot"></video>
-        <figcaption class="cap">यह shot camera से नहीं, AI से बना है</figcaption>
-      </figure>
     </section>
 
     <aside class="side">
@@ -274,29 +304,43 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
           <div><b class="js-m">00</b><span>मिनट</span></div>
           <div><b class="js-s">00</b><span>सेकंड</span></div>
         </div>
-        <div class="price"><span class="now">₹49</span><s>₹499</s><span class="off">90% OFF</span></div>
-        <p class="price-sub">₹499 का webinar · एक बार payment</p>
-        <div class="hold"><svg class="ico" style="width:18px;height:18px"><use href="#i-clock"/></svg><span class="js-hold-line">₹49 price आपके लिए <b class="js-hold">10:00</b> तक reserved है</span></div>
+        <div class="price"><span class="now">₹99</span><s>₹2,999</s><span class="off">97% OFF</span></div>
+        <p class="price-sub">एक बार payment · 2 cheat sheets FREE</p>
+        <div class="value">
+          <div><span>Live webinar</span><s>₹2,999</s></div>
+          <div><span>Cinematic AI Film Prompt Cheat Sheet</span><s>₹1,199</s></div>
+          <div><span>AI Ad Film Shot List Cheat Sheet</span><s>₹1,199</s></div>
+          <div class="tot"><span>कुल value ₹5,397</span><b>आज सिर्फ़ ₹99</b></div>
+        </div>
+        <div class="hold"><svg class="ico" style="width:18px;height:18px"><use href="#i-clock"/></svg><span class="js-hold-line">₹99 price आपके लिए <b class="js-hold">10:00</b> तक reserved है</span></div>
 
-        <!-- Razorpay payment button #1 (same button ID as #2) -->
-        <div class="rzp"><form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_TkGpobePwrFp00" async> </script> </form></div>
+        <form class="book" id="book" novalidate>
+          <label>आपका नाम<input name="name" autocomplete="name" required></label>
+          <label>Email<input name="email" type="email" autocomplete="email" inputmode="email" required></label>
+          <label>WhatsApp number<input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="10 digit number" required></label>
+          <label>शहर<input name="city" autocomplete="address-level2"></label>
+          <input type="hidden" name="source" value="landing">
+          <button type="submit" class="btn pay">₹99 Pay करो — सीट पक्की करो</button>
+          <p class="form-msg" id="form-msg" role="status"></p>
+        </form>
         <p class="secure"><svg class="ico"><use href="#i-lock"/></svg>Razorpay secure checkout · UPI, GPay, PhonePe, Card</p>
 
         <div class="steps">
           <h3>Payment के बाद क्या होगा</h3>
           <ol>
-            <li><span>1</span>₹49 pay करो — 30 seconds</li>
+            <li><span>1</span>Form भरो, ₹99 pay करो — 1 minute</li>
             <li><span>2</span>आपको WhatsApp group में add करेंगे</li>
-            <li><span>3</span>Zoom link group में — शनि रात 8 बजे join</li>
+            <li><span>3</span>Zoom link group में — शुक्र रात 8 बजे join</li>
           </ol>
         </div>
         <div class="incl">
-          <h3>₹49 में आपको मिलेगा</h3>
+          <h3>₹99 में आपको मिलेगा</h3>
           <ul class="checks">
             <li><svg class="ico"><use href="#i-check"/></svg>2 घंटे live session, हिंदी में</li>
             <li><svg class="ico"><use href="#i-check"/></svg>5-step film workflow</li>
             <li><svg class="ico"><use href="#i-check"/></svg>Live Q&amp;A — आपके project के सवाल</li>
             <li><svg class="ico"><use href="#i-check"/></svg>Homework + पूरी tool list</li>
+            <li><svg class="ico"><use href="#i-check"/></svg>2 cheat sheets — worth ₹2,398, FREE</li>
           </ul>
         </div>
         <div class="seats"><svg class="ico" style="width:18px;height:18px"><use href="#i-users"/></svg><span><strong>Limited seats available</strong> — ताकि Q&amp;A में सबको time मिले</span></div>
@@ -306,6 +350,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
     <div class="rest">
       <nav class="tabs" aria-label="Page sections">
         <a href="#learn" class="on">क्या सीखेंगे</a>
+        <a href="#bonus">Bonus</a>
         <a href="#agenda">Agenda</a>
         <a href="#films">फ़िल्में</a>
         <a href="#reviews">Reviews</a>
@@ -324,6 +369,32 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
           <li><svg class="ico"><use href="#i-check"/></svg><span>कौन से tools, कितने <strong>credits का ख़र्च</strong>, बिगड़ी generation कैसे सुधारें</span></li>
           <li><svg class="ico"><use href="#i-check"/></svg><span>AI ad film के लिए <strong>client से कितना charge</strong> करें</span></li>
         </ul>
+      </section>
+
+      <section class="blk" id="bonus">
+        <h2>Webinar के साथ 2 bonus — FREE</h2>
+        <p class="sub">Sarv Media के अपने cheat sheets — जो हम client films में use करते हैं।</p>
+        <div class="bonus">
+          <div class="bcard">
+            <img src="assets/bonus-cinematic-prompts.webp" alt="Cinematic AI Film Prompt Cheat Sheet" width="478" height="640" loading="lazy">
+            <div>
+              <small>BONUS 1</small>
+              <h3>Cinematic AI Film Prompt Cheat Sheet</h3>
+              <p>Character sheet से final shot तक — exactly क्या type करना है, ताकि AI film real लगे।</p>
+              <div class="worth"><s>₹1,199</s><span class="free">FREE</span></div>
+            </div>
+          </div>
+          <div class="bcard">
+            <img src="assets/bonus-ad-film-shot-list.webp" alt="AI Ad Film Shot List Cheat Sheet" width="478" height="640" loading="lazy">
+            <div>
+              <small>BONUS 2</small>
+              <h3>AI Ad Film Shot List Cheat Sheet</h3>
+              <p>30-second ad film का पूरा plan — क्या shoot करें, किस order में, और client को कैसे deliver करें।</p>
+              <div class="worth"><s>₹1,199</s><span class="free">FREE</span></div>
+            </div>
+          </div>
+        </div>
+        <p class="bonus-note"><strong>कुल value ₹2,398</strong> — webinar join करने वालों के लिए बिल्कुल free।</p>
       </section>
 
       <section class="blk" id="agenda">
@@ -346,6 +417,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
         <h2>ये फ़िल्में AI से बनी हैं</h2>
         <p class="sub">हर shot Sarv Media ने AI से बनाया — brands के लिए, real client work।</p>
         <div class="films">
+          <video class="wide" src="assets/shot-4.mp4" poster="assets/shot-4.jpg" autoplay muted loop playsinline preload="metadata" aria-label="AI film shot"></video>
           <video src="assets/shot-1.mp4" poster="assets/shot-1.jpg" autoplay muted loop playsinline preload="metadata" aria-label="AI film shot"></video>
           <video src="assets/shot-2.mp4" poster="assets/shot-2.jpg" autoplay muted loop playsinline preload="metadata" aria-label="AI film shot"></video>
           <video src="assets/scene-2.mp4" poster="assets/scene-2.jpg" autoplay muted loop playsinline preload="metadata" aria-label="AI film shot"></video>
@@ -400,11 +472,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
       <section class="blk" id="faq">
         <h2>अक्सर पूछे जाने वाले सवाल</h2>
         <div class="faq" style="margin-top:16px">
-          <details open><summary><span>Webinar कब है?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p>शनिवार, 10 October 2026 — रात 8 से 10 बजे (IST)। 2 घंटे live session + Q&amp;A।</p></details>
+          <details open><summary><span>Webinar कब है?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p>शुक्रवार, 23 October 2026 — रात 8 से 10 बजे (IST)। 2 घंटे live session + Q&amp;A।</p></details>
           <details><summary><span>किस भाषा में होगा?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p>हिंदी में। Tools और technical terms English में ही बताएँगे, जैसे industry में use होते हैं।</p></details>
           <details><summary><span>क्या पहले से AI या editing आना ज़रूरी है?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p>नहीं। Webinar beginner friendly है — हम story से शुरू करते हैं, tool से नहीं।</p></details>
           <details><summary><span>Join कैसे करूँगा?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p>Payment के बाद आपको हमारे WhatsApp group में add किया जाएगा। Zoom link और reminders वहीं मिलेंगे।</p></details>
           <details><summary><span>Zoom के लिए क्या चाहिए?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p>Phone या laptop पर Zoom app और अच्छा internet — बस इतना।</p></details>
+          <details><summary><span>Cheat sheets कब और कैसे मिलेंगी?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p>Webinar के बाद दोनों cheat sheets WhatsApp group में share की जाएँगी — Cinematic AI Film Prompt Cheat Sheet और AI Ad Film Shot List Cheat Sheet।</p></details>
+          <details><summary><span>Webinar की recording मिलेगी?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p>हाँ — webinar के बाद recording भी WhatsApp group में share की जाएगी।</p></details>
           <details><summary><span>Payment safe है?</span><svg class="ico"><use href="#i-plus"/></svg></summary><p>हाँ — Razorpay secure checkout। UPI, GPay, PhonePe, card या net banking से pay कर सकते हैं।</p></details>
         </div>
       </section>
@@ -414,12 +488,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
 
 <section class="final" id="join">
   <div class="wrap">
-    <p class="kicker">शनिवार रात 8 बजे, live</p>
-    <h2>₹499 का webinar — आज सिर्फ़ ₹49 में</h2>
+    <p class="kicker">शुक्रवार रात 8 बजे, live</p>
+    <h2>₹2,999 का webinar — आज सिर्फ़ ₹99 में</h2>
+    <p class="sub">+ 2 cheat sheets (worth ₹2,398) FREE</p>
     <p class="sub js-cd-inline">Limited seats available</p>
     <div class="pay-box">
-      <!-- Razorpay payment button #2 (same button ID as #1) -->
-      <div class="rzp"><form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_TkGpobePwrFp00" async> </script> </form></div>
+      <a href="#register" class="btn js-pay" style="width:100%;border-radius:14px;font-size:18px;min-height:54px;margin:4px 0 12px">₹99 में सीट बुक करो</a>
       <p class="secure" style="margin:0"><svg class="ico"><use href="#i-lock"/></svg>Payment के बाद WhatsApp group में add — Zoom link वहीं मिलेगा</p>
     </div>
   </div>
@@ -436,8 +510,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
 <script>
 (function () {
   var HOLD_MIN = 10;
-  var START = Date.UTC(2026, 9, 10, 14, 30); // Sat 10 Oct 2026, 8:00 PM IST
-  var END = Date.UTC(2026, 9, 10, 16, 30);
+  var START = Date.UTC(2026, 9, 23, 14, 30); // Fri 23 Oct 2026, 8:00 PM IST
+  var END = Date.UTC(2026, 9, 23, 16, 30);
   var pad = function (n) { return n < 10 ? '0' + n : '' + n; };
   var $ = function (s) { return document.querySelector(s); };
   var $$ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
@@ -466,7 +540,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
     if (left > 0) {
       $$('.js-hold').forEach(function (el) { el.textContent = mmss; });
     } else {
-      $('#strip').textContent = '₹499 का webinar सिर्फ़ ₹49 में · Limited seats available — अभी book करो';
+      $('#strip').textContent = '₹2,999 का webinar सिर्फ़ ₹99 में · Limited seats available — अभी book करो';
       $('.js-hold-line').textContent = 'Limited seats available — भरने से पहले book करो';
     }
   }
@@ -476,16 +550,39 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
   function setTopH() { document.documentElement.style.setProperty('--top-h', $('#top').offsetHeight + 'px'); }
   setTopH(); window.addEventListener('resize', setTopH);
 
-  // Header "Pay" button: open Razorpay directly if its button is reachable, else jump to the pay card
+  // "Book" buttons elsewhere on the page: jump to the booking form
   $$('.js-pay').forEach(function (a) {
     a.addEventListener('click', function (e) {
-      var rzpBtn = document.querySelector('.rzp form button, .rzp form a, .rzp form input[type=submit]');
       e.preventDefault();
-      if (rzpBtn) { rzpBtn.click(); return; }
       var card = $('#register');
       card.scrollIntoView({ behavior: 'smooth', block: 'start' });
       card.classList.add('flash'); setTimeout(function () { card.classList.remove('flash'); }, 1600);
+      setTimeout(function () { $('#book [name=name]').focus({ preventScroll: true }); }, 500);
     });
+  });
+
+  // Intro video: big play button, then native controls
+  var vid = $('#intro-video'), playBtn = $('#intro-play');
+  playBtn.addEventListener('click', function () { vid.controls = true; playBtn.hidden = true; vid.play(); });
+  vid.addEventListener('play', function () { vid.controls = true; playBtn.hidden = true; });
+
+  // Booking form: validate here; payment hookup (Apps Script + Razorpay Checkout) plugs into startPayment()
+  var form = $('#book'), msg = $('#form-msg'), payBtn = form.querySelector('.pay');
+  function startPayment(data) {
+    // TODO: create order via Apps Script, open Razorpay Checkout, verify, then go to thank-you page
+    msg.textContent = 'Booking जल्द शुरू होगी — कुछ घंटों में फिर try करो।';
+    payBtn.disabled = false; payBtn.textContent = '₹99 Pay करो — सीट पक्की करो';
+  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var d = Object.fromEntries(new FormData(form));
+    d.phone = (d.phone || '').replace(/[^\d]/g, '').replace(/^(91|0)(?=\d{10}$)/, '');
+    if (!d.name.trim()) { msg.textContent = 'अपना नाम लिखो।'; form.name.focus(); return; }
+    if (!/^\S+@\S+\.\S+$/.test(d.email)) { msg.textContent = 'सही email लिखो।'; form.email.focus(); return; }
+    if (!/^[6-9]\d{9}$/.test(d.phone)) { msg.textContent = '10 digit का WhatsApp number लिखो।'; form.phone.focus(); return; }
+    msg.textContent = '';
+    payBtn.disabled = true; payBtn.textContent = 'Payment खुल रहा है...';
+    startPayment(d);
   });
 
   // Agenda: open / close all
