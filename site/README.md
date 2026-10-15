@@ -1,18 +1,17 @@
-# AI Cinematic Films Webinar — landing page
+# AI Ad Films & Cinematic Films Webinar — landing page
 
-Static site, no build step. Deploy the contents of this folder to **https://gujjuaiwithjp.com/webinar/**
-(so the page lives at `gujjuaiwithjp.com/webinar/` and the thank-you page at `gujjuaiwithjp.com/webinar/thanks.html`).
+Static site, no build step. Deploy the contents of this folder to **https://gujjuaiwithjp.com/webinar/**.
 
-- `index.html` — landing page (Razorpay payment button `pl_TkGpobePwrFp00` appears twice: price card + final section)
-- `thanks.html` — post-payment page
-- `assets/` — logo, host photo, AI film clips (web-compressed, muted) and their poster frames
+- `index.html` — landing page with Jay's intro video, ₹99 price card and booking form
+- `thank-you.html` — shown after a confirmed payment; opens the WhatsApp group (the link comes from the
+  backend, it is not in these files)
+- `assets/` — logo, photos, intro video, AI film clips, bonus covers
 
-## After deploying
-1. Razorpay → Payment Buttons → this button → set the redirect URL to `https://gujjuaiwithjp.com/webinar/thanks.html`.
-2. Make sure `gujjuaiwithjp.com` is listed as a website on the Razorpay account that owns the button.
-3. Open the page on a phone and make one test payment.
+## Before going live
+1. Set up the Google Sheet backend: see `../apps-script/SETUP.md`.
+2. Put its Web app URL in `index.html`: `var SCRIPT_URL = '';` near the top of the script at the bottom.
+   While it is empty, the form shows "Booking जल्द शुरू होगी" instead of taking payments.
 
-If the page goes at a different path than `/webinar/`, update the `canonical`, `og:url` and `og:image` URLs at the top of `index.html`.
-
-Webinar time is set in the script at the bottom of `index.html` (`START` / `END`, in UTC).
-The price-hold timer length is `HOLD_MIN` (10 minutes, remembered per browser).
+Webinar time is set in the same script (`START` / `END`, in UTC). The price-hold timer is `HOLD_MIN` (10 minutes,
+remembered per browser). If the page goes at a different path than `/webinar/`, update the `canonical`, `og:url`
+and `og:image` URLs at the top of `index.html`.
