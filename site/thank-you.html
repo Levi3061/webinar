@@ -6,6 +6,19 @@
 <meta name="robots" content="noindex">
 <title>Seat book हो गई — AI Ad Films &amp; Cinematic Films Webinar</title>
 <meta name="theme-color" content="#0b0a08">
+<!-- Google Analytics 4: paste your Measurement ID (G-...) below; nothing loads while it is empty -->
+<script>
+  window.GA_ID = '';
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  window.track = function (name, params) { if (window.GA_ID) gtag('event', name, params || {}); };
+  if (window.GA_ID) {
+    var g = document.createElement('script'); g.async = true;
+    g.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.GA_ID;
+    document.head.appendChild(g);
+    gtag('js', new Date()); gtag('config', window.GA_ID);
+  }
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -79,13 +92,19 @@ footer{font-size:13px;color:var(--mute);margin-top:28px}
 (function () {
   var b = null;
   try { b = JSON.parse(sessionStorage.getItem('webinarBooking') || 'null'); } catch (e) {}
+  if (b && b.payment) {   // count each payment once, even if this page is reopened
+    var seen = false;
+    try { seen = sessionStorage.getItem('webinarTracked') === b.payment; sessionStorage.setItem('webinarTracked', b.payment); } catch (e) {}
+    if (!seen) track('purchase', { transaction_id: b.payment, currency: 'INR', value: 99,
+      items: [{ item_id: 'webinar-23oct', item_name: 'AI Ad Films & Cinematic Films Webinar', price: 99, quantity: 1 }] });
+  }
   if (b && b.ok && /^https:\/\/chat\.whatsapp\.com\//.test(b.group)) {
     document.getElementById('ok').hidden = false;
     if (b.name) document.getElementById('hi').textContent = b.name.split(' ')[0] + ', आपकी seat book हो गई!';
     var wa = document.getElementById('wa');
     wa.href = b.group;
     var opened = false;
-    wa.addEventListener('click', function () { opened = true; });
+    wa.addEventListener('click', function () { opened = true; track('whatsapp_group_click'); });
     setTimeout(function () {
       if (opened) return;
       document.getElementById('auto').textContent = 'WhatsApp नहीं खुला? ऊपर वाला button दबाओ।';

@@ -13,6 +13,19 @@
 <meta property="og:image" content="https://heyjay.sarvmedia.com/assets/jay-intro.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0b0a08">
+<!-- Google Analytics 4: paste your Measurement ID (G-...) below; nothing loads while it is empty -->
+<script>
+  window.GA_ID = '';
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  window.track = function (name, params) { if (window.GA_ID) gtag('event', name, params || {}); };
+  if (window.GA_ID) {
+    var g = document.createElement('script'); g.async = true;
+    g.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.GA_ID;
+    document.head.appendChild(g);
+    gtag('js', new Date()); gtag('config', window.GA_ID);
+  }
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
@@ -610,6 +623,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
   $$('.js-pay').forEach(function (a) {
     a.addEventListener('click', function (e) {
       e.preventDefault();
+      track('book_button_click', { location: a.closest('.final') ? 'bottom' : 'header' });
       var card = $('#register');
       card.scrollIntoView({ behavior: 'smooth', block: 'start' });
       card.classList.add('flash'); setTimeout(function () { card.classList.remove('flash'); }, 1600);
@@ -619,7 +633,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
 
   // Intro video: big play button, then native controls
   var vid = $('#intro-video'), playBtn = $('#intro-play');
-  playBtn.addEventListener('click', function () { vid.controls = true; playBtn.hidden = true; vid.play(); });
+  playBtn.addEventListener('click', function () { vid.controls = true; playBtn.hidden = true; vid.play(); track('intro_video_play'); });
+  vid.addEventListener('ended', function () { track('intro_video_complete'); });
   vid.addEventListener('play', function () { vid.controls = true; playBtn.hidden = true; });
 
   // Booking: form → Apps Script creates a Razorpay order → Razorpay Checkout → Apps Script verifies → thank-you page
@@ -665,14 +680,15 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
           setTimeout(go, 25000); // never leave them stuck: the email (webhook) still carries the group link
           api({ action: 'verify', order_id: r.razorpay_order_id, payment_id: r.razorpay_payment_id, signature: r.razorpay_signature })
             .then(function (v) {
-              try { sessionStorage.setItem('webinarBooking', JSON.stringify({ ok: !!v.ok, group: v.group_link || '', name: o.name })); } catch (e) {}
+              try { sessionStorage.setItem('webinarBooking', JSON.stringify({ ok: !!v.ok, group: v.group_link || '', name: o.name, payment: r.razorpay_payment_id })); } catch (e) {}
               go();
             })
             .catch(go); // payment went through; the webhook email still carries the group link
         },
-        modal: { ondismiss: function () { if (!paid) reset('Payment complete नहीं हुआ — फिर से try करो।'); } }
+        modal: { ondismiss: function () { if (!paid) { track('checkout_closed'); reset('Payment complete नहीं हुआ — फिर से try करो।'); } } }
       });
-      rzp.on('payment.failed', function () { msg.textContent = 'Payment fail हुआ — दूसरा UPI app या card try करो।'; });
+      rzp.on('payment.failed', function () { track('payment_failed'); msg.textContent = 'Payment fail हुआ — दूसरा UPI app या card try करो।'; });
+      track('begin_checkout', { currency: 'INR', value: 99, items: [{ item_id: 'webinar-23oct', item_name: 'AI Ad Films & Cinematic Films Webinar', price: 99, quantity: 1 }] });
       rzp.open();
     }).catch(function () { fail('Payment शुरू नहीं हो पाया — दोबारा try करो।'); });
   }
