@@ -58,7 +58,7 @@ Check:
 2. Replace `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET` in Script properties with the live ones and run
    **setupCheck** again; it should say **Mode: LIVE**.
 3. Add the same webhook in **Live Mode** too (webhooks are separate per mode).
-4. Make sure **gujjuaiwithjp.com** is listed as your website in Razorpay.
+4. Make sure **gujjuwithjp.sarvmedia.com** is listed as your website in Razorpay.
 5. Make one real ₹99 payment, check everything as in step 4, then refund it from the dashboard.
 
 ## 6. On the day (optional)

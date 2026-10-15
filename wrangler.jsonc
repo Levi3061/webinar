@@ -1,0 +1,13 @@
+// Cloudflare Worker that serves the static landing page in ./site
+// Deploy: npx wrangler deploy   (from this folder, after `npx wrangler login`)
+{
+  "name": "gujju-webinar",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./site",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    { "pattern": "gujjuwithjp.sarvmedia.com", "custom_domain": true }
+  ]
+}
