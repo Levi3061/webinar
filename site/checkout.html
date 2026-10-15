@@ -299,7 +299,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
 
 /* checkout page */
 .co{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;padding-block:20px 48px}
-.co-sum{order:1}.co-form{order:2}
+.co-sum{order:2}.co-form{order:1}
+.mini-sum{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--surface);border:1px solid rgba(242,162,44,.4);border-radius:14px;padding:12px 14px;margin:0 0 16px}
+.mini-sum span{font-size:14px;color:var(--paper-2);line-height:1.35}
+.mini-sum span small{display:block;color:#4fd18a;font-weight:700;font-size:13px}
+.mini-sum b{font-size:26px;font-weight:800;white-space:nowrap}
+.mini-sum b s{font-size:15px;color:var(--mute);font-weight:500;margin-right:6px}
 .co h1{font-size:clamp(24px,6vw,34px);line-height:1.2;margin:0 0 8px}
 .when{display:flex;flex-wrap:wrap;gap:6px 16px;color:var(--paper-2);font-size:15px;margin:0 0 18px}
 .when span{display:inline-flex;align-items:center;gap:6px}
@@ -328,8 +333,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
 .learn-band .learn{background:none;border:0;padding:0}
 @media (min-width:900px){
   .co{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;padding-block:36px 64px}
-  .co-sum{order:2}.co-form{order:1}
   .sum{position:sticky;top:120px}
+  .mini-sum{display:none}
 }
 </style>
 </head>
@@ -397,6 +402,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
       <span><svg class="ico"><use href="#i-time"/></svg>रात 8–10 बजे IST</span>
       <span><svg class="ico"><use href="#i-video"/></svg>Zoom पर live, हिंदी में</span>
     </div>
+    <div class="mini-sum"><span>Webinar + 2 cheat sheets<small>2 bonus FREE · ₹5,397 का value</small></span><b><s>₹2,999</s>₹99</b></div>
     <div class="hold"><svg class="ico" style="width:18px;height:18px"><use href="#i-clock"/></svg><span class="js-hold-line">₹99 price आपके लिए <b class="js-hold">10:00</b> तक reserved है</span></div>
     <div class="closed" id="closed" hidden>
       <b>Bookings बंद हो गई हैं</b>
