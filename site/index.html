@@ -298,18 +298,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
 </style>
 </head>
 <body>
-<div class="confirming" id="confirming" hidden role="alertdialog" aria-modal="true" aria-labelledby="confirming-title">
-  <div class="box">
-    <div class="spin" aria-hidden="true"></div>
-    <h2 id="confirming-title">Payment मिल गया — seat confirm हो रही है</h2>
-    <p>बस कुछ seconds, फिर WhatsApp group वाला page अपने आप खुलेगा।</p>
-    <div class="dont">
-      <span>⚠ Page scroll मत करो</span>
-      <span>⚠ Back button मत दबाओ</span>
-      <span>⚠ Refresh मत करो</span>
-    </div>
-  </div>
-</div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></symbol>
@@ -333,7 +321,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
       <div class="brand"><img src="assets/sarv-media-logo.png" alt="Sarv Media" width="900" height="227"><span>× Jay Patel</span></div>
       <div style="display:flex;align-items:center;gap:16px">
         <span class="bar-date">शुक्र, 23 Oct · रात 8 बजे</span>
-        <a href="#register" class="btn js-pay">सीट बुक करो · ₹99</a>
+        <a href="checkout.html" class="btn js-pay" data-loc="header">सीट बुक करो · ₹99</a>
       </div>
     </div>
   </div>
@@ -400,15 +388,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
           <b>Bookings बंद हो गई हैं</b>
           <p>यह webinar शुरू हो चुका है। अगले webinar की खबर के लिए Instagram पर <a href="https://www.instagram.com/heyjay.ai/" target="_blank" rel="noopener">@heyjay.ai</a> follow करो।</p>
         </div>
-        <form class="book" id="book" novalidate>
-          <label>आपका नाम<input name="name" autocomplete="name" required></label>
-          <label>Email<input name="email" type="email" autocomplete="email" inputmode="email" required></label>
-          <label>WhatsApp number<input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="10 digit number" required></label>
-          <label>शहर<input name="city" autocomplete="address-level2"></label>
-          <input type="hidden" name="source" value="landing">
-          <button type="submit" class="btn pay">₹99 Pay करो — सीट पक्की करो</button>
-          <p class="form-msg" id="form-msg" role="status"></p>
-        </form>
+        <a href="checkout.html" class="btn pay js-pay" data-loc="card" style="width:100%;border-radius:14px;font-size:18px;min-height:54px;margin:0 0 10px">₹99 में सीट बुक करो →</a>
         <p class="secure"><svg class="ico"><use href="#i-lock"/></svg>Razorpay secure checkout · UPI, GPay, PhonePe, Card</p>
 
         <div class="steps">
@@ -579,7 +559,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
     <p class="sub">+ 2 cheat sheets (worth ₹2,398) FREE</p>
     <p class="sub js-cd-inline">Limited seats available</p>
     <div class="pay-box">
-      <a href="#register" class="btn js-pay" style="width:100%;border-radius:14px;font-size:18px;min-height:54px;margin:4px 0 12px">₹99 में सीट बुक करो</a>
+      <a href="checkout.html" class="btn js-pay" data-loc="bottom" style="width:100%;border-radius:14px;font-size:18px;min-height:54px;margin:4px 0 12px">₹99 में सीट बुक करो</a>
       <p class="secure" style="margin:0"><svg class="ico"><use href="#i-lock"/></svg>Payment के बाद WhatsApp group में add — Zoom link वहीं मिलेगा</p>
     </div>
   </div>
@@ -595,8 +575,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
 
 <script>
 (function () {
-  // Google Apps Script web app URL (Deploy → Web app). Empty = booking shows "जल्द शुरू होगी".
-  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxFrNx0i_jBFhXu0CiKsqdt_XNdllGQaZ_k03_7tlck2pM00Dg86BFoVsLCJy3__9yWRw/exec';
   var HOLD_MIN = 10;
   var START = Date.UTC(2026, 9, 23, 14, 30); // Fri 23 Oct 2026, 8:00 PM IST
   var END = Date.UTC(2026, 9, 23, 16, 30);
@@ -638,8 +616,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
   function closeBookings() {
     if (isClosed) return; isClosed = true;
     $('#strip').textContent = 'Bookings बंद हो गई हैं — webinar शुरू हो चुका है';
-    $('.hold').hidden = true; $('#book').hidden = true; $('.steps').hidden = true; $('#register .secure').hidden = true; $('#closed').hidden = false;
-    $$('.js-pay').forEach(function (a) { a.textContent = 'Bookings बंद'; a.setAttribute('aria-disabled', 'true'); a.style.opacity = '.6'; });
+    $('.hold').hidden = true; $('.steps').hidden = true; $('#register .secure').hidden = true; $('#closed').hidden = false;
+    $$('.js-pay').forEach(function (a) { a.textContent = 'Bookings बंद'; a.removeAttribute('href'); a.setAttribute('aria-disabled', 'true'); a.style.opacity = '.6'; });
   }
   tick(); setInterval(tick, 1000);
 
@@ -647,15 +625,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
   function setTopH() { document.documentElement.style.setProperty('--top-h', $('#top').offsetHeight + 'px'); }
   setTopH(); window.addEventListener('resize', setTopH);
 
-  // "Book" buttons elsewhere on the page: jump to the booking form
+  // Book buttons go to the checkout page
   $$('.js-pay').forEach(function (a) {
     a.addEventListener('click', function (e) {
-      e.preventDefault();
-      track('book_button_click', { location: a.closest('.final') ? 'bottom' : 'header' });
-      var card = $('#register');
-      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      card.classList.add('flash'); setTimeout(function () { card.classList.remove('flash'); }, 1600);
-      setTimeout(function () { $('#book [name=name]').focus({ preventScroll: true }); }, 500);
+      if (isClosed) { e.preventDefault(); return; }
+      track('book_button_click', { location: a.getAttribute('data-loc') || 'other' });
     });
   });
 
@@ -664,74 +638,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
   playBtn.addEventListener('click', function () { vid.controls = true; playBtn.hidden = true; vid.play(); track('intro_video_play'); });
   vid.addEventListener('ended', function () { track('intro_video_complete'); });
   vid.addEventListener('play', function () { vid.controls = true; playBtn.hidden = true; });
-
-  // Booking: form → Apps Script creates a Razorpay order → Razorpay Checkout → Apps Script verifies → thank-you page
-  var form = $('#book'), msg = $('#form-msg'), payBtn = form.querySelector('.pay');
-  var PAY_LABEL = payBtn.textContent;
-  var SUPPORT = 'https://wa.me/919558773923?text=' + encodeURIComponent('Webinar booking में problem आ रही है');
-  function reset(text) { payBtn.disabled = false; payBtn.textContent = PAY_LABEL; msg.textContent = text || ''; }
-  function fail(text) { reset(text + ' दिक्कत रहे तो WhatsApp करो: +91 95587 73923'); }
-  function api(body) {
-    // text/plain keeps this a "simple" request, so the browser skips the CORS preflight Apps Script can't answer
-    return fetch(SCRIPT_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) })
-      .then(function (r) { return r.json(); });
-  }
-  function loadCheckout() {
-    if (window.Razorpay) return Promise.resolve();
-    return new Promise(function (ok, no) {
-      var s = document.createElement('script');
-      s.src = 'https://checkout.razorpay.com/v1/checkout.js'; s.onload = ok; s.onerror = no;
-      document.head.appendChild(s);
-    });
-  }
-  function startPayment(data) {
-    if (!SCRIPT_URL) { reset('Booking जल्द शुरू होगी — थोड़ी देर में फिर try करो।'); return; }
-    data.action = 'order';
-    Promise.all([api(data), loadCheckout()]).then(function (res) {
-      var o = res[0];
-      if (!o.ok && o.error === 'bookings closed') { closeBookings(); return; }
-      if (!o.ok) throw new Error(o.error);
-      var paid = false;
-      var rzp = new window.Razorpay({
-        key: o.key_id, order_id: o.order_id, amount: o.amount, currency: o.currency,
-        name: 'Jay Patel × Sarv Media', description: 'AI Ad Films & Cinematic Films Webinar · 23 Oct',
-        prefill: { name: o.name, email: o.email, contact: '+91' + o.phone },
-        theme: { color: '#F2A22C' },
-        handler: function (r) {
-          paid = true;
-          payBtn.textContent = 'Payment confirm हो रहा है...';
-          $('#confirming').hidden = false; document.body.classList.add('lock');
-          var leaving = false;
-          function go() { if (leaving) return; leaving = true; window.removeEventListener('beforeunload', warn); location.href = 'thank-you.html'; }
-          function warn(ev) { ev.preventDefault(); ev.returnValue = ''; }
-          window.addEventListener('beforeunload', warn);
-          setTimeout(go, 25000); // never leave them stuck: the email (webhook) still carries the group link
-          api({ action: 'verify', order_id: r.razorpay_order_id, payment_id: r.razorpay_payment_id, signature: r.razorpay_signature })
-            .then(function (v) {
-              try { sessionStorage.setItem('webinarBooking', JSON.stringify({ ok: !!v.ok, group: v.group_link || '', name: o.name, payment: r.razorpay_payment_id })); } catch (e) {}
-              go();
-            })
-            .catch(go); // payment went through; the webhook email still carries the group link
-        },
-        modal: { ondismiss: function () { if (!paid) { track('checkout_closed'); reset('Payment complete नहीं हुआ — फिर से try करो।'); } } }
-      });
-      rzp.on('payment.failed', function () { track('payment_failed'); msg.textContent = 'Payment fail हुआ — दूसरा UPI app या card try करो।'; });
-      track('begin_checkout', { currency: 'INR', value: 99, items: [{ item_id: 'webinar-23oct', item_name: 'AI Ad Films & Cinematic Films Webinar', price: 99, quantity: 1 }] });
-      rzp.open();
-    }).catch(function () { fail('Payment शुरू नहीं हो पाया — दोबारा try करो।'); });
-  }
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (Date.now() >= START) { closeBookings(); return; }
-    var d = Object.fromEntries(new FormData(form));
-    d.phone = (d.phone || '').replace(/[^\d]/g, '').replace(/^(91|0)(?=\d{10}$)/, '');
-    if (!d.name.trim()) { msg.textContent = 'अपना नाम लिखो।'; form.name.focus(); return; }
-    if (!/^\S+@\S+\.\S+$/.test(d.email)) { msg.textContent = 'सही email लिखो।'; form.email.focus(); return; }
-    if (!/^[6-9]\d{9}$/.test(d.phone)) { msg.textContent = '10 digit का WhatsApp number लिखो।'; form.phone.focus(); return; }
-    msg.textContent = '';
-    payBtn.disabled = true; payBtn.textContent = 'Payment खुल रहा है...';
-    startPayment(d);
-  });
 
   // Agenda: open / close all
   var btn = $('#toggle-all'), items = $$('#agenda details');
