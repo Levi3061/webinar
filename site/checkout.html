@@ -550,16 +550,19 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
       rzp.on('payment.failed', function () { track('payment_failed'); msg.textContent = 'Payment fail हुआ — दूसरा UPI app या card try करो।'; });
       track('begin_checkout', { currency: 'INR', value: 99, items: [{ item_id: 'webinar-23oct', item_name: 'AI Ad Films & Cinematic Films Webinar', price: 99, quantity: 1 }] });
       rzp.open();
-    }).catch(function () { fail('Payment शुरू नहीं हो पाया — दोबारा try करो।'); });
+    }).catch(function (err) { track('order_failed', { reason: String((err && err.message) || err).slice(0, 90) }); fail('Payment शुरू नहीं हो पाया — दोबारा try करो।'); });
   }
+  var started = false;
+  form.addEventListener('focusin', function () { if (!started) { started = true; track('form_start'); } });
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (Date.now() >= START) { closeBookings(); return; }
     var d = Object.fromEntries(new FormData(form));
     d.phone = (d.phone || '').replace(/[^\d]/g, '').replace(/^(91|0)(?=\d{10}$)/, '');
-    if (!d.name.trim()) { msg.textContent = 'अपना नाम लिखो।'; form.name.focus(); return; }
-    if (!/^\S+@\S+\.\S+$/.test(d.email)) { msg.textContent = 'सही email लिखो।'; form.email.focus(); return; }
-    if (!/^[6-9]\d{9}$/.test(d.phone)) { msg.textContent = '10 digit का WhatsApp number लिखो।'; form.phone.focus(); return; }
+    track('form_submit');
+    if (!d.name.trim()) { track('form_error', { field: 'name' }); msg.textContent = 'अपना नाम लिखो।'; form.name.focus(); return; }
+    if (!/^\S+@\S+\.\S+$/.test(d.email)) { track('form_error', { field: 'email' }); msg.textContent = 'सही email लिखो।'; form.email.focus(); return; }
+    if (!/^[6-9]\d{9}$/.test(d.phone)) { track('form_error', { field: 'phone' }); msg.textContent = '10 digit का WhatsApp number लिखो।'; form.phone.focus(); return; }
     msg.textContent = '';
     payBtn.disabled = true; payBtn.textContent = 'Payment खुल रहा है...';
     startPayment(d);
