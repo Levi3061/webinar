@@ -47,9 +47,9 @@ Add a **second** webhook: `<masterclass /exec URL>?token=<masterclass WEBHOOK_TO
 Each script ignores the other's payments (the webinar one only accepts ₹99; this one only orders tagged `masterclass`).
 
 ## 5. Dates
-Thu 29 Oct → Sun 1 Nov 2026, 8–11 PM IST, in Hindi. Bookings close automatically when Day 1 starts (29 Oct, 8 PM IST):
-- `START = Date.UTC(2026, 9, 29, 14, 30)` in `site/masterclass/index.html` and `checkout.html`
-- `BOOKINGS_CLOSE = new Date('2026-10-29T14:30:00Z')` in `Code.gs`
+Wed 28 Oct → Sat 31 Oct 2026, 8–11 PM IST, in Hindi. Bookings close automatically when Day 1 starts (28 Oct, 8 PM IST):
+- `START = Date.UTC(2026, 9, 28, 14, 30)` in `site/masterclass/index.html` and `checkout.html`
+- `BOOKINGS_CLOSE = new Date('2026-10-28T14:30:00Z')` in `Code.gs`
 
 If the dates change, update those three plus the date text on the pages and `WHEN_TEXT` in `Code.gs`.
 

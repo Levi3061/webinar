@@ -26,10 +26,10 @@
 const SHEET_NAME = 'Masterclass';
 const PRODUCT = 'masterclass';
 const PRICE = 259900;               // ₹2,599 for everyone (the pages show it as the Diwali offer, ₹9,999 crossed out)
-// Bookings close when Day 1 starts: Thu 29 Oct 2026, 8:00 PM IST
-const BOOKINGS_CLOSE = new Date('2026-10-29T14:30:00Z');
+// Bookings close when Day 1 starts: Wed 28 Oct 2026, 8:00 PM IST
+const BOOKINGS_CLOSE = new Date('2026-10-28T14:30:00Z');
 const TITLE = 'AI Realism Masterclass';
-const WHEN_TEXT = '4 live sessions · 29, 30, 31 Oct और 1 Nov 2026 · रात 8–11 बजे (IST) · Zoom पर, हिंदी में';
+const WHEN_TEXT = '4 live sessions · 28, 29, 30, 31 Oct 2026 · रात 8–11 बजे (IST) · Zoom पर, हिंदी में';
 const SUPPORT_WA = '+91 95587 73923';
 const FROM_NAME = 'Jay Patel × Sarv Media';
 const HEADERS = ['Time', 'Name', 'Email', 'Phone', 'Source', 'Order ID', 'Payment ID', 'Status', 'Paid at', 'Email', 'Notes', 'Amount'];
