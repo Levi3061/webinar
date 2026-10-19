@@ -39,7 +39,7 @@ in Script properties without redeploying. Emails sent after the change use the n
 
 ## 3. Publish
 **Deploy → New deployment → Web app** · Execute as **Me** · Access **Anyone** → copy the `/exec` URL.
-Put it in `site/masterclass/checkout.html`: `var SCRIPT_URL = '…';` (or send it to us).
+Already in `site/masterclass/checkout.html` (`var SCRIPT_URL`). If you ever make a **new** deployment (new URL), update it there.
 After any later code change: **Manage deployments → Edit → New version**.
 
 ## 4. Razorpay webhook (Live Mode)
