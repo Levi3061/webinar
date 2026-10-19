@@ -7,6 +7,8 @@ Static site served by a Cloudflare Worker at **https://heyjay.sarvmedia.com/** (
   page's book buttons link here
 - `thank-you.html` — shown after a verified payment; opens the WhatsApp group (the link comes from the
   Apps Script backend, it is not in these files)
+- `masterclass/` — AI Realism Masterclass pages (landing, checkout, thank-you); backend in
+  `../apps-script-masterclass/` (separate Sheet + script from the webinar)
 - `404.html` — sends stray visitors back to the page
 - `assets/` — logo, photos, intro video, AI film clips, bonus covers
 
