@@ -341,9 +341,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
   .mini-sum{display:none}
 }
 
-.hint{font-size:13px;color:#f6c27a;margin:-2px 0 4px}
 .line .disc small{display:block;font-weight:500;color:var(--mute);font-size:12px}
-.applied{background:rgba(31,158,85,.12);border:1px solid rgba(31,158,85,.45);color:#7fe0a8;border-radius:12px;padding:10px 12px;font-size:14px;margin:0 0 10px}
 
 </style>
 </head>
@@ -394,9 +392,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
     <div class="sum">
       <h2>Order summary</h2>
       <div class="line"><span>AI Realism Masterclass — 4 live days</span><b>₹2,999</b></div>
-      <div class="line"><span>Webinar attendee discount<small style="display:block;color:var(--mute);font-size:12px">webinar वाला email या WhatsApp डालो</small></span><b class="disc">−₹399</b></div>
-      <div class="total"><span>Total · webinar attendees</span><b>₹2,599</b></div>
-      <p class="cd-mini" style="text-align:left">बाकी सबके लिए ₹2,999 · एक बार payment</p>
+      <div class="line"><span>Webinar attendee discount</span><b class="disc">−₹399</b></div>
+      <div class="total"><span>Total</span><b>₹2,599</b></div>
+      <p class="cd-mini" style="text-align:left">एक बार payment · ₹399 off पहले से लगा हुआ</p>
       <ul class="checks" style="margin-top:14px">
         <li><svg class="ico"><use href="#i-check"/></svg>4 live sessions (12 घंटे) + lifetime recordings</li>
         <li><svg class="ico"><use href="#i-check"/></svg>AI Realism Call Sheet access</li>
@@ -419,12 +417,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
       <p>Masterclass शुरू हो चुकी है। अगले batch की खबर के लिए Instagram पर <a href="https://www.instagram.com/heyjay.ai/" target="_blank" rel="noopener">@heyjay.ai</a> follow करो।</p>
     </div>
     <form class="book" id="book" novalidate>
-      <p class="hint">Webinar attend किया था? वही email या WhatsApp number डालो — ₹399 off अपने आप लग जाएगा।</p>
       <label>आपका नाम<input name="name" autocomplete="name" required></label>
       <label>Email<input name="email" type="email" autocomplete="email" inputmode="email" required></label>
       <label>WhatsApp number<input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="10 digit number" required></label>
       <input type="hidden" name="source" value="masterclass-checkout">
-      <p class="applied" id="applied" hidden></p>
       <button type="submit" class="btn pay">Pay करो — सीट पक्की करो</button>
       <p class="form-msg" id="form-msg" role="status"></p>
     </form>
@@ -456,7 +452,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
   // Day 1 start (UTC): bookings close at this moment
   var START = Date.UTC(2026, 9, 29, 14, 30); // Thu 29 Oct 2026, 8:00 PM IST
   var $ = function (s) { return document.querySelector(s); };
-  var fmt = function (paise) { return '₹' + (paise / 100).toLocaleString('en-IN'); };
 
   var isClosed = false;
   function closeBookings() {
@@ -469,7 +464,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
   track('checkout_page_view', { product: 'masterclass' });
 
   // form → Apps Script decides the price + creates the Razorpay order → Razorpay Checkout → verify → thank-you
-  var form = $('#book'), msg = $('#form-msg'), payBtn = form.querySelector('.pay'), applied = $('#applied');
+  var form = $('#book'), msg = $('#form-msg'), payBtn = form.querySelector('.pay');
   var PAY_LABEL = payBtn.textContent;
   function reset(text) { payBtn.disabled = false; payBtn.textContent = PAY_LABEL; msg.textContent = text || ''; }
   function fail(text) { reset(text + ' दिक्कत रहे तो WhatsApp करो: +91 95587 73923'); }
@@ -492,10 +487,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
       var o = res[0];
       if (!o.ok && o.error === 'bookings closed') { closeBookings(); return; }
       if (!o.ok) throw new Error(o.error);
-      applied.hidden = false;
-      applied.textContent = o.discount
-        ? '✓ Webinar attendee — ₹399 off लग गया। आपका price: ' + fmt(o.amount)
-        : 'इस email/number पर webinar booking नहीं मिली — price: ' + fmt(o.amount) + '। Webinar attend किया था तो वही email/number डालकर फिर try करो।';
       var value = o.amount / 100;
       var paid = false;
       var rzp = new window.Razorpay({
@@ -537,8 +528,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
     if (!d.name.trim()) { track('form_error', { field: 'name' }); msg.textContent = 'अपना नाम लिखो।'; form.name.focus(); return; }
     if (!/^\S+@\S+\.\S+$/.test(d.email)) { track('form_error', { field: 'email' }); msg.textContent = 'सही email लिखो।'; form.email.focus(); return; }
     if (!/^[6-9]\d{9}$/.test(d.phone)) { track('form_error', { field: 'phone' }); msg.textContent = '10 digit का WhatsApp number लिखो।'; form.phone.focus(); return; }
-    msg.textContent = ''; applied.hidden = true;
-    payBtn.disabled = true; payBtn.textContent = 'Price check हो रहा है...';
+    msg.textContent = '';
+    payBtn.disabled = true; payBtn.textContent = 'Payment खुल रहा है...';
     startPayment(d);
   });
 })();

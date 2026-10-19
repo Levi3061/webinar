@@ -10,16 +10,12 @@
  *   RAZORPAY_KEY_SECRET  the matching Key Secret
  *   GROUP_LINK           the MASTERCLASS WhatsApp group invite link
  *   WEBHOOK_TOKEN        any long random text (different from the webinar one); also in the webhook URL
- *   WEBINAR_SHEET_ID     REQUIRED: id of the webinar registrations Sheet (the long id in its URL, between
- *                        /d/ and /edit). Paid webinar rows with the same email or number get ₹2,599;
- *                        without it everyone is charged ₹2,999. setupCheck stops if it is missing.
  *   CALL_SHEET_NOTE      one or two lines on how buyers get Call Sheet access, added to the confirmation
  *                        email. Empty = the email only says access comes in the WhatsApp group.
  *   BREVO_KEY, FROM_EMAIL   optional, only if Gmail's daily email limit runs out
  *
  * The masterclass checkout page calls this web app twice per booking:
- *   {action:'order', name, email, phone, source} → decides the price (₹2,599 for webinar attendees,
- *                                                  else ₹2,999), creates a Razorpay order, saves a "created" row
+ *   {action:'order', name, email, phone, source} → creates a ₹2,599 Razorpay order, saves a "created" row
  *   {action:'verify', order_id, payment_id, signature} → checks the signature, marks the row "paid",
  *                                                  emails the group link, returns it to the page
  * Razorpay also calls it directly (webhook, payment.captured) as a backup. Every order carries
@@ -29,17 +25,15 @@
 
 const SHEET_NAME = 'Masterclass';
 const PRODUCT = 'masterclass';
-const PRICE_FULL = 299900;          // ₹2,999
-const PRICE_ATTENDEE = 259900;      // ₹2,599 — ₹399 off for webinar attendees
-const DISCOUNT_FOR_ALL = false;     // true = everyone pays ₹2,599
+const PRICE = 259900;               // ₹2,599 for everyone (the page shows it as the webinar price, ₹2,999 crossed out)
 // Bookings close when Day 1 starts: Thu 29 Oct 2026, 8:00 PM IST
 const BOOKINGS_CLOSE = new Date('2026-10-29T14:30:00Z');
 const TITLE = 'AI Realism Masterclass';
 const WHEN_TEXT = '4 live sessions · 29, 30, 31 Oct और 1 Nov 2026 · रात 8–11 बजे (IST) · Zoom पर, हिंदी में';
 const SUPPORT_WA = '+91 95587 73923';
 const FROM_NAME = 'Jay Patel × Sarv Media';
-const HEADERS = ['Time', 'Name', 'Email', 'Phone', 'Webinar attendee', 'Source', 'Order ID', 'Payment ID', 'Status', 'Paid at', 'Email', 'Notes', 'Amount'];
-const COL = { name: 2, email: 3, phone: 4, attendee: 5, order: 7, payment: 8, status: 9, paidAt: 10, emailed: 11, notes: 12, amount: 13 };
+const HEADERS = ['Time', 'Name', 'Email', 'Phone', 'Source', 'Order ID', 'Payment ID', 'Status', 'Paid at', 'Email', 'Notes', 'Amount'];
+const COL = { name: 2, email: 3, phone: 4, order: 6, payment: 7, status: 8, paidAt: 9, emailed: 10, notes: 11, amount: 12 };
 
 function prop_(k) { return PropertiesService.getScriptProperties().getProperty(k) || ''; }
 function json_(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }
@@ -60,7 +54,7 @@ function doPost(e) {
   }
 }
 
-/* ---------- 1. create order (price is decided here, never by the page) ---------- */
+/* ---------- 1. create order (the price is set here, never by the page) ---------- */
 function createOrder_(p) {
   if (BOOKINGS_CLOSE && new Date() >= BOOKINGS_CLOSE) return { ok: false, error: 'bookings closed' };
   const name = clean_(p.name, 80), email = clean_(p.email, 120).toLowerCase();
@@ -68,38 +62,18 @@ function createOrder_(p) {
   if (!name || !/^\S+@\S+\.\S+$/.test(email) || !/^[6-9]\d{9}$/.test(phone)) {
     return { ok: false, error: 'invalid details' };
   }
-  const attendee = DISCOUNT_FOR_ALL || isWebinarAttendee_(email, phone);
-  const amount = attendee ? PRICE_ATTENDEE : PRICE_FULL;
   const order = razorpay_('post', '/orders', {
-    amount: amount, currency: 'INR', receipt: 'mc-' + Date.now(),
-    notes: { product: PRODUCT, name: name, email: email, phone: phone, attendee: attendee ? 'yes' : 'no' }
+    amount: PRICE, currency: 'INR', receipt: 'mc-' + Date.now(),
+    notes: { product: PRODUCT, name: name, email: email, phone: phone }
   });
   withLock_(function () {
-    sheet_().appendRow([new Date(), name, email, "'" + phone, attendee ? 'yes' : 'no', clean_(p.source, 30),
-      order.id, '', 'created', '', '', '', amount / 100]);
+    sheet_().appendRow([new Date(), name, email, "'" + phone, clean_(p.source, 30),
+      order.id, '', 'created', '', '', '', PRICE / 100]);
   });
   return {
     ok: true, key_id: prop_('RAZORPAY_KEY_ID'), order_id: order.id, amount: order.amount, currency: order.currency,
-    discount: attendee, name: name, email: email, phone: phone
+    name: name, email: email, phone: phone
   };
-}
-
-// Paid webinar registrations with the same email or WhatsApp number get the attendee price.
-function isWebinarAttendee_(email, phone) {
-  const id = prop_('WEBINAR_SHEET_ID');
-  if (!id) return false;
-  try {
-    const sh = SpreadsheetApp.openById(id).getSheetByName('Registrations');
-    if (!sh || sh.getLastRow() < 2) return false;
-    const rows = sh.getRange(2, 1, sh.getLastRow() - 1, 9).getValues();   // Time, Name, Email, Phone, City, Source, Order, Payment, Status
-    for (let i = 0; i < rows.length; i++) {
-      if (String(rows[i][8]) !== 'paid') continue;
-      const e = String(rows[i][2] || '').trim().toLowerCase();
-      const ph = String(rows[i][3] || '').replace(/\D/g, '').slice(-10);
-      if ((e && e === email) || (ph && ph === phone)) return true;
-    }
-  } catch (err) { console.error('webinar lookup failed: ' + err); }
-  return false;
 }
 
 /* ---------- 2. verify after checkout ---------- */
@@ -120,7 +94,7 @@ function handleWebhook_(body, token) {
   if (!ent || !ent.id) return { ok: false, error: 'no payment' };
   const pay = razorpay_('get', '/payments/' + encodeURIComponent(ent.id));
   if (pay.status !== 'captured' || !pay.order_id) return { ok: true, ignored: 'not captured' };
-  if (pay.amount !== PRICE_FULL && pay.amount !== PRICE_ATTENDEE) return { ok: true, ignored: 'not ours' };
+  if (pay.amount !== PRICE) return { ok: true, ignored: 'not ours' };
   const order = razorpay_('get', '/orders/' + encodeURIComponent(pay.order_id));
   if (!order.notes || order.notes.product !== PRODUCT) return { ok: true, ignored: 'not ours' };
   markPaid_(pay.order_id, pay.id, 'webhook', order);
@@ -135,7 +109,7 @@ function markPaid_(orderId, paymentId, via, order) {
     let row = findRow_(sh, orderId);
     if (!row) {   // order made outside the page flow, or the row was deleted: rebuild it from Razorpay
       const n = (order && order.notes) || {};
-      sh.appendRow([new Date(), n.name || '', n.email || '', "'" + (n.phone || ''), n.attendee || '', via, orderId, '', 'created', '', '', '',
+      sh.appendRow([new Date(), n.name || '', n.email || '', "'" + (n.phone || ''), via, orderId, '', 'created', '', '', '',
         order && order.amount ? order.amount / 100 : '']);
       row = sh.getLastRow();
     }
@@ -246,26 +220,14 @@ function safeEqual_(a, b) {
 function clean_(s, max) { return String(s || '').replace(/[\r\n\t]+/g, ' ').trim().replace(/^[=+\-@]+/, '').slice(0, max); }
 function esc_(s) { return String(s || '').replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
-/** Run once from the editor after setting Script properties: checks keys, the webinar sheet link, and creates the tab. */
+/** Run once from the editor after setting Script properties: checks keys and creates the tab. */
 function setupCheck() {
   ['RAZORPAY_KEY_ID', 'RAZORPAY_KEY_SECRET', 'GROUP_LINK', 'WEBHOOK_TOKEN'].forEach(function (k) {
     if (!prop_(k)) throw new Error('Missing script property: ' + k);
   });
   sheet_();
   razorpay_('get', '/orders?count=1');
-  let webinar = 'not needed (DISCOUNT_FOR_ALL)';
-  if (!DISCOUNT_FOR_ALL) {
-    if (!prop_('WEBINAR_SHEET_ID')) throw new Error('Missing script property: WEBINAR_SHEET_ID — without it no webinar attendee gets ₹2,599');
-    let ss;
-    try { ss = SpreadsheetApp.openById(prop_('WEBINAR_SHEET_ID')); }
-    catch (err) { throw new Error('WEBINAR_SHEET_ID: cannot open that Sheet. Check the id, and that this Google account can open the webinar Sheet.'); }
-    const sh = ss.getSheetByName('Registrations');
-    if (!sh) throw new Error('WEBINAR_SHEET_ID opens "' + ss.getName() + '", which has no "Registrations" tab. Is it the webinar Sheet?');
-    const paid = sh.getLastRow() < 2 ? 0 : sh.getRange(2, 9, sh.getLastRow() - 1, 1).getValues()
-      .filter(function (r) { return r[0] === 'paid'; }).length;
-    webinar = '"' + ss.getName() + '" linked, ' + paid + ' paid webinar bookings';
-  }
   if (!prop_('CALL_SHEET_NOTE')) console.warn('CALL_SHEET_NOTE is empty: confirmation emails will only say Call Sheet access comes in the WhatsApp group.');
   console.log('All good. Mode: ' + (prop_('RAZORPAY_KEY_ID').indexOf('rzp_live_') === 0 ? 'LIVE' : 'TEST')
-    + ' · webinar sheet: ' + webinar + ' · emails left today: ' + MailApp.getRemainingDailyQuota());
+    + ' · price: ₹' + PRICE / 100 + ' · emails left today: ' + MailApp.getRemainingDailyQuota());
 }
