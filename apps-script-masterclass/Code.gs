@@ -10,9 +10,11 @@
  *   RAZORPAY_KEY_SECRET  the matching Key Secret
  *   GROUP_LINK           the MASTERCLASS WhatsApp group invite link
  *   WEBHOOK_TOKEN        any long random text (different from the webinar one); also in the webhook URL
- *   WEBINAR_SHEET_ID     id of the webinar registrations Sheet (the long id in its URL), used to give
- *                        webinar attendees the ₹399 discount automatically
- *   CALL_SHEET_NOTE      optional: one line about Call Sheet access, added to the confirmation email
+ *   WEBINAR_SHEET_ID     REQUIRED: id of the webinar registrations Sheet (the long id in its URL, between
+ *                        /d/ and /edit). Paid webinar rows with the same email or number get ₹2,599;
+ *                        without it everyone is charged ₹2,999. setupCheck stops if it is missing.
+ *   CALL_SHEET_NOTE      one or two lines on how buyers get Call Sheet access, added to the confirmation
+ *                        email. Empty = the email only says access comes in the WhatsApp group.
  *   BREVO_KEY, FROM_EMAIL   optional, only if Gmail's daily email limit runs out
  *
  * The masterclass checkout page calls this web app twice per booking:
@@ -251,11 +253,19 @@ function setupCheck() {
   });
   sheet_();
   razorpay_('get', '/orders?count=1');
-  let webinar = 'not set (no attendee discount)';
-  if (prop_('WEBINAR_SHEET_ID')) {
-    const sh = SpreadsheetApp.openById(prop_('WEBINAR_SHEET_ID')).getSheetByName('Registrations');
-    webinar = sh ? 'linked, ' + Math.max(0, sh.getLastRow() - 1) + ' rows' : 'sheet found but no "Registrations" tab';
+  let webinar = 'not needed (DISCOUNT_FOR_ALL)';
+  if (!DISCOUNT_FOR_ALL) {
+    if (!prop_('WEBINAR_SHEET_ID')) throw new Error('Missing script property: WEBINAR_SHEET_ID — without it no webinar attendee gets ₹2,599');
+    let ss;
+    try { ss = SpreadsheetApp.openById(prop_('WEBINAR_SHEET_ID')); }
+    catch (err) { throw new Error('WEBINAR_SHEET_ID: cannot open that Sheet. Check the id, and that this Google account can open the webinar Sheet.'); }
+    const sh = ss.getSheetByName('Registrations');
+    if (!sh) throw new Error('WEBINAR_SHEET_ID opens "' + ss.getName() + '", which has no "Registrations" tab. Is it the webinar Sheet?');
+    const paid = sh.getLastRow() < 2 ? 0 : sh.getRange(2, 9, sh.getLastRow() - 1, 1).getValues()
+      .filter(function (r) { return r[0] === 'paid'; }).length;
+    webinar = '"' + ss.getName() + '" linked, ' + paid + ' paid webinar bookings';
   }
+  if (!prop_('CALL_SHEET_NOTE')) console.warn('CALL_SHEET_NOTE is empty: confirmation emails will only say Call Sheet access comes in the WhatsApp group.');
   console.log('All good. Mode: ' + (prop_('RAZORPAY_KEY_ID').indexOf('rzp_live_') === 0 ? 'LIVE' : 'TEST')
     + ' · webinar sheet: ' + webinar + ' · emails left today: ' + MailApp.getRemainingDailyQuota());
 }
