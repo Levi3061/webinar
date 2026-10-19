@@ -25,7 +25,7 @@
 
 const SHEET_NAME = 'Masterclass';
 const PRODUCT = 'masterclass';
-const PRICE = 259900;               // ₹2,599 for everyone (the page shows it as the webinar price, ₹2,999 crossed out)
+const PRICE = 259900;               // ₹2,599 for everyone (the pages show it as the Diwali offer, ₹9,999 crossed out)
 // Bookings close when Day 1 starts: Thu 29 Oct 2026, 8:00 PM IST
 const BOOKINGS_CLOSE = new Date('2026-10-29T14:30:00Z');
 const TITLE = 'AI Realism Masterclass';

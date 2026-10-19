@@ -1,7 +1,7 @@
 # Masterclass booking setup
 
 Same flow as the webinar, but a **separate** Google Sheet + script, so nothing about the live webinar changes.
-Everyone pays **₹2,599** (the pages show it as the webinar-attendee price, ₹2,999 crossed out). There is no check against the webinar Sheet.
+Everyone pays **₹2,599** (the pages show it as the Diwali offer, ₹9,999 crossed out). There is no check against the webinar Sheet.
 Pages: `site/masterclass/` → https://heyjay.sarvmedia.com/masterclass/ (deployed with the rest of `site/`).
 
 ## 1. WhatsApp group
