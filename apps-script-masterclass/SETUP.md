@@ -4,7 +4,8 @@ Same flow as the webinar, but a **separate** Google Sheet + script, so nothing a
 Pages: `site/masterclass/` → https://heyjay.sarvmedia.com/masterclass/ (deployed with the rest of `site/`).
 
 ## 1. WhatsApp group
-Create the masterclass group (admins-only messages), copy its invite link.
+Masterclass group invite link: `https://chat.whatsapp.com/HSCXV6o7dEJD18qopNxxk6` (set group messages to admins-only).
+It goes only into the `GROUP_LINK` script property below — never on the pages.
 
 ## 2. Google Sheet + script
 1. New Google Sheet: **Masterclass Registrations** → **Extensions → Apps Script** → paste `Code.gs` from this folder → Save.
@@ -14,7 +15,7 @@ Create the masterclass group (admins-only messages), copy its invite link.
    |---|---|
    | `RAZORPAY_KEY_ID` | your live Key ID (`rzp_live_…`), same Razorpay account as the webinar is fine |
    | `RAZORPAY_KEY_SECRET` | its Key Secret |
-   | `GROUP_LINK` | the **masterclass** WhatsApp group link |
+   | `GROUP_LINK` | `https://chat.whatsapp.com/HSCXV6o7dEJD18qopNxxk6` (the **masterclass** group, not the webinar one) |
    | `WEBHOOK_TOKEN` | new random text (not the webinar one) |
    | `WEBINAR_SHEET_ID` | the webinar Sheet's id — the long part of its URL between `/d/` and `/edit` |
    | `CALL_SHEET_NOTE` | optional — one line about Call Sheet access for the confirmation email |
@@ -30,10 +31,12 @@ After any later code change: **Manage deployments → Edit → New version**.
 Add a **second** webhook: `<masterclass /exec URL>?token=<masterclass WEBHOOK_TOKEN>`, event **payment.captured**.
 Each script ignores the other's payments (the webinar one only accepts ₹99; this one only orders tagged `masterclass`).
 
-## 5. Dates (before going live)
-The dates appear as text on the three pages and in `WHEN_TEXT` in `Code.gs`. When final, also set:
-- `START` in `site/masterclass/index.html` and `checkout.html` (Day 1, 8 PM IST in UTC, e.g. `Date.UTC(2026, 10, 1, 14, 30)`)
-- `BOOKINGS_CLOSE` in `Code.gs` (same moment, e.g. `new Date('2026-11-01T14:30:00Z')`)
+## 5. Dates
+Thu 29 Oct → Sun 1 Nov 2026, 8–11 PM IST, in Hindi. Bookings close automatically when Day 1 starts (29 Oct, 8 PM IST):
+- `START = Date.UTC(2026, 9, 29, 14, 30)` in `site/masterclass/index.html` and `checkout.html`
+- `BOOKINGS_CLOSE = new Date('2026-10-29T14:30:00Z')` in `Code.gs`
+
+If the dates change, update those three plus the date text on the pages and `WHEN_TEXT` in `Code.gs`.
 
 ## 6. Test
 Book with an email/number that **is** in the webinar Sheet (expect ₹2,599) and one that **isn't** (expect ₹2,999).

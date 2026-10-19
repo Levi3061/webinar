@@ -30,10 +30,10 @@ const PRODUCT = 'masterclass';
 const PRICE_FULL = 299900;          // ₹2,999
 const PRICE_ATTENDEE = 259900;      // ₹2,599 — ₹399 off for webinar attendees
 const DISCOUNT_FOR_ALL = false;     // true = everyone pays ₹2,599
-// Bookings close when Day 1 starts. null = never close (until the dates are confirmed).
-const BOOKINGS_CLOSE = null;        // e.g. new Date('2026-11-01T14:30:00Z') for 8:00 PM IST
+// Bookings close when Day 1 starts: Thu 29 Oct 2026, 8:00 PM IST
+const BOOKINGS_CLOSE = new Date('2026-10-29T14:30:00Z');
 const TITLE = 'AI Realism Masterclass';
-const WHEN_TEXT = '4 live sessions · 4, 6, 8, 10 Oct 2026 · रात 8–11 बजे (IST) · Zoom पर, गुजराती में';
+const WHEN_TEXT = '4 live sessions · 29, 30, 31 Oct और 1 Nov 2026 · रात 8–11 बजे (IST) · Zoom पर, हिंदी में';
 const SUPPORT_WA = '+91 95587 73923';
 const FROM_NAME = 'Jay Patel × Sarv Media';
 const HEADERS = ['Time', 'Name', 'Email', 'Phone', 'Webinar attendee', 'Source', 'Order ID', 'Payment ID', 'Status', 'Paid at', 'Email', 'Notes', 'Amount'];

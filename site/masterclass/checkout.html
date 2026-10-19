@@ -409,9 +409,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
   <section class="co-form" id="register" aria-label="Booking form">
     <h1>AI Realism Masterclass</h1>
     <div class="when">
-      <span><svg class="ico"><use href="#i-cal"/></svg>4 · 6 · 8 · 10 Oct 2026</span>
+      <span><svg class="ico"><use href="#i-cal"/></svg>29 Oct – 1 Nov 2026</span>
       <span><svg class="ico"><use href="#i-time"/></svg>रात 8–11 बजे IST</span>
-      <span><svg class="ico"><use href="#i-video"/></svg>Zoom पर live, गुजराती में</span>
+      <span><svg class="ico"><use href="#i-video"/></svg>Zoom पर live, हिंदी में</span>
     </div>
     <div class="mini-sum"><span>Masterclass · 4 live days<small>Webinar attendees: ₹399 off अपने आप</small></span><b><s>₹2,999</s>₹2,599</b></div>
     <div class="closed" id="closed" hidden>
@@ -453,8 +453,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
 (function () {
   // Masterclass Apps Script web app URL (a separate deployment from the webinar one). Empty = "जल्द शुरू होगी".
   var SCRIPT_URL = '';
-  // Day 1 start (UTC). null = bookings never auto-close (set once the dates are final).
-  var START = null; // e.g. Date.UTC(2026, 10, 1, 14, 30)
+  // Day 1 start (UTC): bookings close at this moment
+  var START = Date.UTC(2026, 9, 29, 14, 30); // Thu 29 Oct 2026, 8:00 PM IST
   var $ = function (s) { return document.querySelector(s); };
   var fmt = function (paise) { return '₹' + (paise / 100).toLocaleString('en-IN'); };
 
