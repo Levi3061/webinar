@@ -27,11 +27,12 @@ src="https://www.facebook.com/tr?id=1621482369445074&ev=PageView&noscript=1"></n
   window.GA_ID = 'G-8BS5TXDHQ4';
   window.dataLayer = window.dataLayer || [];
   window.gtag = function () { dataLayer.push(arguments); };
-  // One call sends each booking step to Google Analytics and the Meta Pixel
+  // One call sends each booking step to Google Analytics, the Meta Pixel and Clarity
   var FB_EVENTS = { begin_checkout: 'InitiateCheckout', purchase: 'Purchase' };
   window.track = function (name, params) {
     params = params || {};
     if (window.GA_ID) gtag('event', name, params);
+    if (window.clarity) clarity('event', name);
     if (window.fbq) {
       var fbStd = FB_EVENTS[name];
       var fbParams = params.value ? { value: params.value, currency: params.currency || 'INR', content_name: 'Webinar 23 Oct' } : {};
@@ -45,6 +46,17 @@ src="https://www.facebook.com/tr?id=1621482369445074&ev=PageView&noscript=1"></n
     g.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.GA_ID;
     document.head.appendChild(g);
     gtag('js', new Date()); gtag('config', window.GA_ID);
+  }
+</script>
+<!-- Microsoft Clarity: paste your Project ID below; nothing loads while it is empty -->
+<script>
+  window.CLARITY_ID = '';
+  if (window.CLARITY_ID) {
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+      t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, 'clarity', 'script', window.CLARITY_ID);
   }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -86,7 +98,7 @@ footer{font-size:13px;color:var(--mute);margin-top:28px}
   <!-- Shown right after a confirmed payment -->
   <section id="ok" hidden>
     <div class="tick"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div>
-    <h1><span id="hi">Seat book हो गई!</span></h1>
+    <h1 data-clarity-mask="true"><span id="hi">Seat book हो गई!</span></h1>
     <p class="when"><b>शुक्रवार, 23 October · रात 8 बजे (IST)</b> · Zoom पर live</p>
     <div class="card">
       <h2>एक last step: WhatsApp group join करो</h2>
